@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Yuri's Blog">
 <meta property="og:description" content="本文详细介绍了使用Hexo进行环境搭建的流程。">
 <meta property="og:image" content="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png">
-<meta property="og:updated_time" content="2016-01-04T01:04:11.694Z">
+<meta property="og:updated_time" content="2016-01-04T01:14:43.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Hexo搭建个人博客（一）">
 <meta name="twitter:description" content="本文详细介绍了使用Hexo进行环境搭建的流程。">
@@ -126,24 +126,30 @@ var _hmt = _hmt || [];
 </ul>
 <p>如果没有Github账号，请先注册，注册完成后，新建一个与你的用户名相对应的仓库『your_user_name.github.io』，以本人博客为例，『xuyuri.github.io』</p>
 <ul>
-<li>设置SSH公钥<br>可以直接参考<a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="external">官方教程</a></li>
+<li>设置SSH公钥</li>
 </ul>
+<p>可以直接参考<a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="external">官方教程</a>进行设置。</p>
 <p>[1] 检测是否存在SSH公钥</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -al ~/.ssh</span><br><span class="line"><span class="comment"># Lists the files in your .ssh directory, if they exist</span></span><br></pre></td></tr></table></figure>
 <p>如果存在id_rsa.pub文件：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ls -al ~/.ssh</span><br><span class="line">total <span class="number">24</span></span><br><span class="line">drwxr-xr-x <span class="number">1</span> Eliot Eliot    <span class="number">0</span> <span class="number">12</span>月 <span class="number">30</span> <span class="number">16</span>:<span class="number">47</span> ./</span><br><span class="line">drwxr-xr-x <span class="number">1</span> Eliot Eliot    <span class="number">0</span> <span class="number">12</span>月 <span class="number">31</span> <span class="number">01</span>:<span class="number">01</span> ../</span><br><span class="line">-rw-r--r-- <span class="number">1</span> Eliot Eliot <span class="number">3243</span> <span class="number">12</span>月 <span class="number">30</span> <span class="number">16</span>:<span class="number">28</span> id_rsa</span><br><span class="line">-rw-r--r-- <span class="number">1</span> Eliot Eliot  <span class="number">743</span> <span class="number">12</span>月 <span class="number">30</span> <span class="number">16</span>:<span class="number">28</span> id_rsa.pub</span><br><span class="line">-rw-r--r-- <span class="number">1</span> Eliot Eliot <span class="number">1595</span> <span class="number">12</span>月 <span class="number">31</span> <span class="number">01</span>:<span class="number">19</span> known_hosts</span><br></pre></td></tr></table></figure>
-<p>则可以直接跳至第三步，将id_rsa.pub文件内容添加到Github中。</p>
+<p>则可以直接跳至第三步，将id_rsa.pub文件内容添加到Github中；</p>
 <p>[2] 生成新SSH公钥</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b <span class="number">4096</span> -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
 <p>此后步骤一直按回车键即可，最后显示：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Your <span class="keyword">public</span> key has been saved in /c/Users/Eliot/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXXXXXXXXX@<span class="number">126.</span>com</span><br><span class="line">The key<span class="string">'s randomart image is:</span><br><span class="line">+---[RSA 4096]----+</span><br><span class="line">|.+.o...   .o     |</span><br><span class="line">|  + ..o.=.+ o    |</span><br><span class="line">|   . o ooB.* .   |</span><br><span class="line">|    .    oBo=o   |</span><br><span class="line">|        E=.+o.+  |</span><br><span class="line">|       . oO. = ..|</span><br><span class="line">|         o.oo o o|</span><br><span class="line">|          .. + ..|</span><br><span class="line">|            +oo .|</span><br><span class="line">+----[SHA256]-----+</span></span><br></pre></td></tr></table></figure></p>
-<p>表示新的SSH Key已经生成成功。</p>
+<p>表示新的SSH Key已经生成成功；</p>
 <p>[3] 添加至Github</p>
+<p>Github中选择Personal settings -&gt; SSH keys -&gt; Add SSH key；Title可以随便填写，将生成的id_rsa.pub文件内容填写至Key文本框中；</p>
+<p>[4] 测试连接<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
+<p>如果提示：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">Hi xuyuri! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure></p>
+<p>表明设置成功！</p>
+<p>… 未完待续 …</p>
 
       
     </div>
     <footer class="article-footer">
       <!-- modify by yurixu 2016/1/1 replace Share -->
-      <a data-url="http://yurixu.com/blog/2016/01/03/使用Hexo搭建个人博客（一）/" data-id="ciiz9l66e00036wuqnby5ci7g" class="article-share-link bdsharebuttonbox" data-cmd="more">Share</a>
+      <a data-url="http://yurixu.com/blog/2016/01/03/使用Hexo搭建个人博客（一）/" data-id="ciiz9taec00035suqr4x6zsky" class="article-share-link bdsharebuttonbox" data-cmd="more">Share</a>
       <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
