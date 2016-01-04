@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>使用Hexo搭建个人博客（一） | Yuri&#39;s Blog</title>
+  <title>Hexo搭建个人博客（一） | Yuri&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="本文详细介绍了使用Hexo进行环境搭建的流程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo搭建个人博客（一）">
-<meta property="og:url" content="http://yurixu.com/blog/2016/01/03/使用Hexo搭建个人博客（一）/index.html">
+<meta property="og:title" content="Hexo搭建个人博客（一）">
+<meta property="og:url" content="http://yurixu.com/blog/2016/01/03/Hexo搭建个人博客（一）/index.html">
 <meta property="og:site_name" content="Yuri's Blog">
 <meta property="og:description" content="本文详细介绍了使用Hexo进行环境搭建的流程。">
 <meta property="og:image" content="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png">
-<meta property="og:updated_time" content="2016-01-04T01:17:31.912Z">
+<meta property="og:updated_time" content="2016-01-04T14:29:32.303Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Hexo搭建个人博客（一）">
+<meta name="twitter:title" content="Hexo搭建个人博客（一）">
 <meta name="twitter:description" content="本文详细介绍了使用Hexo进行环境搭建的流程。">
   
   
@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-使用Hexo搭建个人博客（一）" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Hexo搭建个人博客（一）" class="article article-type-post" itemscope itemprop="blogPost">
   
   <div class="article-inner">
     
@@ -96,7 +96,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      使用Hexo搭建个人博客（一）
+      Hexo搭建个人博客（一）
     </h1>
   
 
@@ -104,7 +104,7 @@ var _hmt = _hmt || [];
     
     <!-- add by yurixu 2016/1/3 将文章时间放在标题下 -->
     <div class="article-meta">
-      <a href="/blog/2016/01/03/使用Hexo搭建个人博客（一）/" class="article-date">
+      <a href="/blog/2016/01/03/Hexo搭建个人博客（一）/" class="article-date">
   <time datetime="2016-01-03T13:37:04.000Z" itemprop="datePublished">2016-1-3 周日  21:37</time>
 </a>
       
@@ -120,7 +120,7 @@ var _hmt = _hmt || [];
         <p><img src="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png" alt=""></p>
 <p>本系列文章总结了Hexo搭建个人博客的流程以及对搭建过程中遇到的问题进行汇总。<br><a id="more"></a></p>
 <h2 id="u73AF_u5883_u642D_u5EFA"><a href="#u73AF_u5883_u642D_u5EFA" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>使用Hexo搭建个人Blog需要首先安装Node.js、Git以及注册Github。</p>
-<h4 id="u5B89_u88C5Node-js_u548CGit"><a href="#u5B89_u88C5Node-js_u548CGit" class="headerlink" title="安装Node.js和Git"></a>安装Node.js和Git</h4><p>分别到<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>和<a href="http://git-scm.com/download/" target="_blank" rel="external">Git</a>官网下载最新版本，并安装。</p>
+<h4 id="Node-js_u548CGit"><a href="#Node-js_u548CGit" class="headerlink" title="Node.js和Git"></a>Node.js和Git</h4><p>分别到<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>和<a href="http://git-scm.com/download/" target="_blank" rel="external">Git</a>官网下载最新版本，并安装。</p>
 <h4 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h4><ul>
 <li>新建仓库</li>
 </ul>
@@ -143,17 +143,38 @@ var _hmt = _hmt || [];
 <p>[4] 测试连接<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
 <p>如果提示：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">Hi xuyuri! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure></p>
 <p>表明设置成功！</p>
-<p>… 未完待续 …</p>
+<h2 id="u535A_u5BA2_u5B89_u88C5"><a href="#u535A_u5BA2_u5B89_u88C5" class="headerlink" title="博客安装"></a>博客安装</h2><p>Hexo依赖的环境配置完成后就可以进行博客的安装、初始化以及生成静态页面。</p>
+<h3 id="Hexo_u5B89_u88C5"><a href="#Hexo_u5B89_u88C5" class="headerlink" title="Hexo安装"></a>Hexo安装</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+<h3 id="Hexo_u521D_u59CB_u5316"><a href="#Hexo_u521D_u59CB_u5316" class="headerlink" title="Hexo初始化"></a>Hexo初始化</h3><p>随意在一个目录下新建文件夹『your_user_name.github.io』，以本人博客为例，『xuyuri.github.io』，然后在该目录下执行如下命令：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
+<h3 id="u751F_u6210_u9759_u6001_u9875_u9762"><a href="#u751F_u6210_u9759_u6001_u9875_u9762" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="u542F_u52A8_u672C_u5730_u670D_u52A1"><a href="#u542F_u52A8_u672C_u5730_u670D_u52A1" class="headerlink" title="启动本地服务"></a>启动本地服务</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>如果以上安装配置正确，可以得到如下结果：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br><span class="line">INFO  Hexo is running at http:<span class="comment">//0.0.0.0:4000/. Press Ctrl+C to stop.</span></span><br></pre></td></tr></table></figure></p>
+<p>打开浏览器，输入：<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>就可以看到Hexo默认的主题页面。</p>
+<h3 id="u90E8_u7F72_u81F3Github"><a href="#u90E8_u7F72_u81F3Github" class="headerlink" title="部署至Github"></a>部署至Github</h3><p>如果想要通过你创建的仓库名称访问博客，例如：<a href="/xuyuri.github.io">xuyuri.github.io</a>，则需要将本地代码部署到Github上。</p>
+<ul>
+<li>修改配置文件</li>
+</ul>
+<p>在博客根目录下找到配置文件<strong>_config.yml</strong>，找到最底部的Deployment配置<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:xuyuri/xuyuri.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<p>将其中的xuyuri换成自己的Github名称即可。<br><em>注：repo是仓库的地址，此处要使用仓库的SSH地址链接，不要使用HTTPS地址链接。</em></p>
+<ul>
+<li>部署代码</li>
+</ul>
+<p>执行以下命令安装hexo-deployer-git：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<p><em>备注：许多教程提供的命令是 hexo d，但是我经常得到错误提示：ERROR Deployer not found: git，所以使用：npm install hexo-deployer-git –save</em></p>
+<p>部署代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></p>
+<p>此时通过访问仓库名称即可访问到博客。</p>
+<h2 id="u5199_u5728_u540E_u9762"><a href="#u5199_u5728_u540E_u9762" class="headerlink" title="写在后面"></a>写在后面</h2><p>现在Hexo提供了常用命令的简写形式：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo n == hexo <span class="keyword">new</span></span><br><span class="line">hexo g == hexo generate</span><br><span class="line">hexo s == hexo server</span><br><span class="line">hexo d == hexo deploy</span><br></pre></td></tr></table></figure></p>
+<p>此外，在开启本地服务时修改博客内容，Hexo可以自动编译，不需要每次进行hexo g操作。<br>关于如何打造自己的个性化Hexo博客以及对Hexo配置文件各配置的含义的介绍，我将会在下一节<a href="http://yurixu.com/blog/2016/01/04/Hexo搭建个人博客（二）/">Hexo搭建个人博客（二）</a>中进行说明。</p>
 
       
     </div>
     <footer class="article-footer">
       <!-- modify by yurixu 2016/1/1 replace Share -->
-      <a data-url="http://yurixu.com/blog/2016/01/03/使用Hexo搭建个人博客（一）/" data-id="ciiz9taec00035suqr4x6zsky" class="article-share-link bdsharebuttonbox" data-cmd="more">Share</a>
+      <a data-url="http://yurixu.com/blog/2016/01/03/Hexo搭建个人博客（一）/" data-id="cij02aqvt0000lwuqd8eyugln" class="article-share-link bdsharebuttonbox" data-cmd="more">Share</a>
       <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
-        <a href="http://yurixu.com/blog/2016/01/03/使用Hexo搭建个人博客（一）/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://yurixu.com/blog/2016/01/03/Hexo搭建个人博客（一）/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
@@ -164,11 +185,11 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/blog/2016/01/04/使用Hexo搭建个人博客（二）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2016/01/04/Hexo搭建个人博客（二）/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          使用Hexo搭建个人博客（二）
+          Hexo搭建个人博客（二）
         
       </div>
     </a>
@@ -189,7 +210,7 @@ var _hmt = _hmt || [];
     <!-- modify by yurixu 2016/1/1 add id  disqus_thread -->
     <div id="disqus_thread">
       <!-- 多说评论框 start -->
-      <div class="ds-thread" data-thread-key="post-使用Hexo搭建个人博客（一）" data-title="使用Hexo搭建个人博客（一）" data-url="http://yurixu.com/blog/2016/01/03/使用Hexo搭建个人博客（一）/"></div>
+      <div class="ds-thread" data-thread-key="post-Hexo搭建个人博客（一）" data-title="Hexo搭建个人博客（一）" data-url="http://yurixu.com/blog/2016/01/03/Hexo搭建个人博客（一）/"></div>
       <!-- 多说评论框 end -->
       <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
       <script type="text/javascript">
@@ -256,11 +277,11 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
-            <a href="/blog/2016/01/04/使用Hexo搭建个人博客（二）/">使用Hexo搭建个人博客（二）</a>
+            <a href="/blog/2016/01/04/Hexo搭建个人博客（二）/">Hexo搭建个人博客（二）</a>
           </li>
         
           <li>
-            <a href="/blog/2016/01/03/使用Hexo搭建个人博客（一）/">使用Hexo搭建个人博客（一）</a>
+            <a href="/blog/2016/01/03/Hexo搭建个人博客（一）/">Hexo搭建个人博客（一）</a>
           </li>
         
           <li>
