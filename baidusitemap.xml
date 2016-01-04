@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://yurixu.com/blog/2016/01/03/%E4%BD%BF%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
-    <lastmod>2016-01-03T15:56:49.377Z</lastmod>
+    <lastmod>2016-01-04T01:01:31.568Z</lastmod>
     <data>
         <display>
         <title>使用Hexo搭建个人博客（一）</title>
@@ -20,6 +20,21 @@
              
               <breadCrumb title="Hexo" url="http://yurixu.com/categories/Hexo/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/01/04/%E4%BD%BF%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
+    <lastmod>2016-01-03T16:01:56.047Z</lastmod>
+    <data>
+        <display>
+        <title>使用Hexo搭建个人博客（二）</title>
+        <pubTime>2016-01-03T16:01:56.000Z</pubTime>
+        
+         
+           
         </display>
     </data>
     </url>

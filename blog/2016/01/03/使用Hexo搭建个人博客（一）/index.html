@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Yuri's Blog">
 <meta property="og:description" content="本文详细介绍了使用Hexo进行环境搭建的流程。">
 <meta property="og:image" content="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png">
-<meta property="og:updated_time" content="2016-01-03T15:56:49.377Z">
+<meta property="og:updated_time" content="2016-01-04T01:01:31.568Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Hexo搭建个人博客（一）">
 <meta name="twitter:description" content="本文详细介绍了使用Hexo进行环境搭建的流程。">
@@ -117,18 +117,33 @@ var _hmt = _hmt || [];
       
         <!-- add by yurixu 2016/1/3 添加文章目录 -->
         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">文章目录</strong>
-              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C_u4E00_u7AE0"><span class="toc-number">1.</span> <span class="toc-text">第一章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C_u4E8C_u7AE0"><span class="toc-number">2.</span> <span class="toc-text">第二章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C_u4E09_u7AE0"><span class="toc-number">3.</span> <span class="toc-text">第三章</span></a></li></ol>
-          </div>
-        
         <p><img src="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png" alt=""></p>
-<h2 id="u7B2C_u4E00_u7AE0"><a href="#u7B2C_u4E00_u7AE0" class="headerlink" title="第一章"></a>第一章</h2><h2 id="u7B2C_u4E8C_u7AE0"><a href="#u7B2C_u4E8C_u7AE0" class="headerlink" title="第二章"></a>第二章</h2><h2 id="u7B2C_u4E09_u7AE0"><a href="#u7B2C_u4E09_u7AE0" class="headerlink" title="第三章"></a>第三章</h2>
+<p>本系列文章总结了Hexo搭建个人博客的流程以及对搭建过程中遇到的问题进行汇总。</p>
+<h2 id="u73AF_u5883_u642D_u5EFA"><a href="#u73AF_u5883_u642D_u5EFA" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>使用Hexo搭建个人Blog需要首先安装Node.js、Git以及注册Github。</p>
+<h3 id="u5B89_u88C5Node-js_u548CGit"><a href="#u5B89_u88C5Node-js_u548CGit" class="headerlink" title="安装Node.js和Git"></a>安装Node.js和Git</h3><p>分别到<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>和<a href="http://git-scm.com/download/" target="_blank" rel="external">Git</a>官网下载最新版本，并安装。</p>
+<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><ul>
+<li>新建仓库</li>
+</ul>
+<p>如果没有Github账号，请先注册，注册完成后，新建一个与你的用户名相对应的仓库『your_user_name.github.io』，以本人博客为例，『xuyuri.github.io』</p>
+<ul>
+<li>设置SSH公钥<br>可以直接参考<a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="external">官方教程</a></li>
+</ul>
+<p>[1] 检测是否存在SSH公钥</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -al ~/.ssh</span><br><span class="line"><span class="comment"># Lists the files in your .ssh directory, if they exist</span></span><br></pre></td></tr></table></figure>
+<p>如果存在id_rsa.pub文件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ls -al ~/.ssh</span><br><span class="line">total <span class="number">24</span></span><br><span class="line">drwxr-xr-x <span class="number">1</span> Eliot Eliot    <span class="number">0</span> <span class="number">12</span>月 <span class="number">30</span> <span class="number">16</span>:<span class="number">47</span> ./</span><br><span class="line">drwxr-xr-x <span class="number">1</span> Eliot Eliot    <span class="number">0</span> <span class="number">12</span>月 <span class="number">31</span> <span class="number">01</span>:<span class="number">01</span> ../</span><br><span class="line">-rw-r--r-- <span class="number">1</span> Eliot Eliot <span class="number">3243</span> <span class="number">12</span>月 <span class="number">30</span> <span class="number">16</span>:<span class="number">28</span> id_rsa</span><br><span class="line">-rw-r--r-- <span class="number">1</span> Eliot Eliot  <span class="number">743</span> <span class="number">12</span>月 <span class="number">30</span> <span class="number">16</span>:<span class="number">28</span> id_rsa.pub</span><br><span class="line">-rw-r--r-- <span class="number">1</span> Eliot Eliot <span class="number">1595</span> <span class="number">12</span>月 <span class="number">31</span> <span class="number">01</span>:<span class="number">19</span> known_hosts</span><br></pre></td></tr></table></figure>
+<p>则可以直接跳至第三步，将id_rsa.pub文件内容添加到Github中。</p>
+<p>[2] 生成新SSH公钥</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b <span class="number">4096</span> -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>此后步骤一直按回车键即可，最后显示：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Your <span class="keyword">public</span> key has been saved in /c/Users/Eliot/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXXXXXXXXX@<span class="number">126.</span>com</span><br><span class="line">The key<span class="string">'s randomart image is:</span><br><span class="line">+---[RSA 4096]----+</span><br><span class="line">|.+.o...   .o     |</span><br><span class="line">|  + ..o.=.+ o    |</span><br><span class="line">|   . o ooB.* .   |</span><br><span class="line">|    .    oBo=o   |</span><br><span class="line">|        E=.+o.+  |</span><br><span class="line">|       . oO. = ..|</span><br><span class="line">|         o.oo o o|</span><br><span class="line">|          .. + ..|</span><br><span class="line">|            +oo .|</span><br><span class="line">+----[SHA256]-----+</span></span><br></pre></td></tr></table></figure></p>
+<p>表示新的SSH Key已经生成成功。</p>
+<p>[3] 添加至Github</p>
+
       
     </div>
     <footer class="article-footer">
       <!-- modify by yurixu 2016/1/1 replace Share -->
-      <a data-url="http://yurixu.com/blog/2016/01/03/使用Hexo搭建个人博客（一）/" data-id="ciiyq18pr0002hwuq8vgnaswg" class="article-share-link bdsharebuttonbox" data-cmd="more">Share</a>
+      <a data-url="http://yurixu.com/blog/2016/01/03/使用Hexo搭建个人博客（一）/" data-id="ciiyq7vf20003vsuqfpeev9ny" class="article-share-link bdsharebuttonbox" data-cmd="more">Share</a>
       <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
@@ -142,6 +157,15 @@ var _hmt = _hmt || [];
   
     
 <nav id="article-nav">
+  
+    <a href="/blog/2016/01/04/使用Hexo搭建个人博客（二）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用Hexo搭建个人博客（二）
+        
+      </div>
+    </a>
   
   
     <a href="/blog/2016/01/01/Hello-World/" id="article-nav-older" class="article-nav-link-wrap">
@@ -214,7 +238,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -224,6 +248,10 @@ var _hmt = _hmt || [];
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2016/01/04/使用Hexo搭建个人博客（二）/">使用Hexo搭建个人博客（二）</a>
+          </li>
         
           <li>
             <a href="/blog/2016/01/03/使用Hexo搭建个人博客（一）/">使用Hexo搭建个人博客（一）</a>
