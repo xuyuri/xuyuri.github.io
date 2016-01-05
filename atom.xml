@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Walk step by step]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yurixu.com/"/>
-  <updated>2016-01-05T14:44:13.469Z</updated>
+  <updated>2016-01-05T15:29:23.664Z</updated>
   <id>http://yurixu.com/</id>
   
   <author>
@@ -19,9 +19,13 @@
     <link href="http://yurixu.com/blog/2016/01/05/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89/"/>
     <id>http://yurixu.com/blog/2016/01/05/Hexo搭建个人博客（三）/</id>
     <published>2016-01-05T14:34:36.000Z</published>
-    <updated>2016-01-05T14:44:13.469Z</updated>
+    <updated>2016-01-05T15:29:23.664Z</updated>
     <content type="html"><![CDATA[<p><img src="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png" alt=""></p>
 <p>本文详细介绍了如何发布文章以及如何打造个性化Hexo博客。<br><a id="more"></a></p>
+<h2 id="u5982_u4F55_u53D1_u5E03_u6587_u7AE0"><a href="#u5982_u4F55_u53D1_u5E03_u6587_u7AE0" class="headerlink" title="如何发布文章"></a>如何发布文章</h2><p>执行hexo new命令会在hexo/source/_posts/目录下生成指定名称的文章。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> [layout] <span class="string">"post_name"</span> <span class="comment">#新建文章</span></span><br></pre></td></tr></table></figure></p>
+<p>其中layout是可选参数，默认为post，layout模板文件在目录scaffolds下。<br>post.md默认内容为：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>如果想在每篇文章中添加categories分类信息，只需要修改post.md文件即可：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;	<span class="comment">#文章名称</span></span><br><span class="line">date: &#123;&#123; date &#125;&#125;	<span class="comment">#文章发布日期</span></span><br><span class="line">categories: 		<span class="comment">#文章分类（可以为空）</span></span><br><span class="line">tags: 			<span class="comment">#文章标签（可以为空），多标签格式[tag1,tag2,tag3]</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>— 未完待续 —</p>
 ]]></content>
     <summary type="html">
     <![CDATA[本文详细介绍了如何发布文章以及如何打造个性化博客。]]>
