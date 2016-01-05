@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Walk step by step]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yurixu.com/"/>
-  <updated>2016-01-05T14:34:36.065Z</updated>
+  <updated>2016-01-05T14:44:13.469Z</updated>
   <id>http://yurixu.com/</id>
   
   <author>
@@ -19,11 +19,20 @@
     <link href="http://yurixu.com/blog/2016/01/05/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89/"/>
     <id>http://yurixu.com/blog/2016/01/05/Hexo搭建个人博客（三）/</id>
     <published>2016-01-05T14:34:36.000Z</published>
-    <updated>2016-01-05T14:34:36.065Z</updated>
-    <content type="html"></content>
+    <updated>2016-01-05T14:44:13.469Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png" alt=""></p>
+<p>本文详细介绍了如何发布文章以及如何打造个性化Hexo博客。<br><a id="more"></a></p>
+]]></content>
     <summary type="html">
+    <![CDATA[本文详细介绍了如何发布文章以及如何打造个性化博客。]]>
     
     </summary>
+    
+      <category term="Hexo" scheme="http://yurixu.com/tags/Hexo/"/>
+    
+      <category term="博客" scheme="http://yurixu.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="Hexo" scheme="http://yurixu.com/categories/Hexo/"/>
     
   </entry>
   
