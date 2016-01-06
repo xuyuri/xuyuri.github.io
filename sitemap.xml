@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yurixu.com/404.html</loc>
+    <lastmod>2016-01-06T14:23:09.781Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yurixu.com/blog/2016/01/05/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
     <lastmod>2016-01-06T14:03:17.828Z</lastmod>
   </url>
