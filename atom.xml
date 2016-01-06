@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Walk step by step]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yurixu.com/"/>
-  <updated>2016-01-06T05:55:15.200Z</updated>
+  <updated>2016-01-06T06:01:49.215Z</updated>
   <id>http://yurixu.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yurixu.com/blog/2016/01/05/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89/"/>
     <id>http://yurixu.com/blog/2016/01/05/Hexo搭建个人博客（三）/</id>
     <published>2016-01-05T14:34:36.000Z</published>
-    <updated>2016-01-06T05:55:15.200Z</updated>
+    <updated>2016-01-06T06:01:49.215Z</updated>
     <content type="html"><![CDATA[<p><img src="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png" alt=""></p>
 <p>本文详细介绍了如何发布文章以及如何打造个性化Hexo博客。<br><a id="more"></a></p>
 <h2 id="u5982_u4F55_u53D1_u5E03_u6587_u7AE0"><a href="#u5982_u4F55_u53D1_u5E03_u6587_u7AE0" class="headerlink" title="如何发布文章"></a>如何发布文章</h2><p>执行hexo new命令会在hexo/source/_posts/目录下生成指定名称的文章。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> [layout] <span class="string">"post_name"</span> <span class="comment">#新建文章</span></span><br></pre></td></tr></table></figure></p>
@@ -42,7 +42,7 @@
 <p>找到themes/landscape/layout/_partial/head.ejs的第31行：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href=<span class="string">"http://fonts.googleapis.com/css?family=Source+Code+Pro"</span> rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <p>替换为：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href=<span class="string">"//fonts.useso.com/css?family=Lato:400,400italic"</span> rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <p>注：经过以上文件链接替换，博客打开速度会产生质的飞跃。</p>
-<h2 id="u8BC4_u8BBA"><a href="#u8BC4_u8BBA" class="headerlink" title="评论"></a>评论</h2><p>Hexo默认使用国外流行的disqus，因国内访问部分网址受限，选择多说评论。</p>
+<h2 id="u8BC4_u8BBA"><a href="#u8BC4_u8BBA" class="headerlink" title="评论"></a>评论</h2><p>Hexo默认使用国外流行的disqus，国内建议选择多说评论。</p>
 <ul>
 <li>注册：首先在<a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>注册账号</li>
 <li>配置<br>在整站配置文件_config.yml中添加多说的配置：<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">duoshuo_shortname: 你站点的short_name</span><br></pre></td></tr></table></figure>
@@ -52,7 +52,7 @@
 <p>替换为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.duoshuo_shortname)&#123; %&gt;</span><br><span class="line">  &lt;section id="comments"&gt;</span><br><span class="line">    &lt;!-- 多说评论框 start --&gt;</span><br><span class="line">    &lt;div class="ds-thread" data-thread-key="&lt;%= post.layout %&gt;-&lt;%= post.slug %&gt;" data-title="&lt;%= post.title %&gt;" data-url="&lt;%= page.permalink %&gt;"&gt;&lt;/div&gt;</span><br><span class="line">    &lt;!-- 多说评论框 end --&gt;</span><br><span class="line">    &lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span><br><span class="line">    &lt;script type="text/javascript"&gt;</span><br><span class="line">    var duoshuoQuery = &#123;short_name:'&lt;%= config.duoshuo_shortname %&gt;'&#125;;</span><br><span class="line">      (function() &#123;</span><br><span class="line">        var ds = document.createElement('script');</span><br><span class="line">        ds.type = 'text/javascript';ds.async = true;</span><br><span class="line">        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';</span><br><span class="line">        ds.charset = 'UTF-8';</span><br><span class="line">        (document.getElementsByTagName('head')[0] </span><br><span class="line">         || document.getElementsByTagName('body')[0]).appendChild(ds);</span><br><span class="line">      &#125;)();</span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">    &lt;!-- 多说公共JS代码 end --&gt;</span><br><span class="line">  &lt;/section&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure></p>
 <p>找到第27行，把：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (post.comments &amp;&amp; config.disqus_shortname)&#123; %&gt;</span><br><span class="line">  &lt;a href="&lt;%- post.permalink %&gt;#disqus_thread" class="article-comment-link"&gt;Comments&lt;/a&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure></p>
 <p>替换为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (post.comments &amp;&amp; config.duoshuo_shortname)&#123; %&gt;</span><br><span class="line">  &lt;a href="&lt;%- url_for(post.path) %&gt;#comments" class="article-comment-link"&gt;留言&lt;/a&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure></p>
-<p>— 未完待续 —</p>
+<h2 id="u767E_u5EA6_u5206_u4EAB"><a href="#u767E_u5EA6_u5206_u4EAB" class="headerlink" title="百度分享"></a>百度分享</h2><p>Hexo默认的分享在国内访问受限，所以选择使用百度分享。<br>— 未完待续 —</p>
 ]]></content>
     <summary type="html">
     <![CDATA[本文详细介绍了如何发布文章以及如何打造个性化博客。]]>
