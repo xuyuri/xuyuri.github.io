@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Yuri's Blog">
 <meta property="og:description" content="本文详细介绍了如何发布文章以及如何打造个性化博客。">
 <meta property="og:image" content="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png">
-<meta property="og:updated_time" content="2016-01-06T14:03:17.828Z">
+<meta property="og:updated_time" content="2016-01-06T15:33:00.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo搭建个人博客（三）">
 <meta name="twitter:description" content="本文详细介绍了如何发布文章以及如何打造个性化博客。">
@@ -153,13 +153,20 @@ var _hmt = _hmt || [];
 <h2 id="u767E_u5EA6_u7EDF_u8BA1"><a href="#u767E_u5EA6_u7EDF_u8BA1" class="headerlink" title="百度统计"></a>百度统计</h2><p>Hexo默认为Google统计，修改为百度统计。注册并登陆<a href="http://sitecenter.baidu.com/" target="_blank" rel="external">百度统计</a>，在网站中心添加网站域名并获取代码。<br>在主题配置文件themes/landscape/_config.yml中添加配置项：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baidu_tongji: <span class="keyword">true</span> 			<span class="comment">#百度统计</span></span><br></pre></td></tr></table></figure></p>
 <p>新建百度统计ejs文件：themes\landscape\layout_partial\baidu_tongji.ejs，设置内容如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (theme.baidu_tongji)&#123; %&gt;</span><br><span class="line"><span class="comment">#你的百度统计代码</span></span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure></p>
 <p>打开themes\landscape\layout_partial\head.ejs，在底部<code>&lt;/head&gt;</code>之前添加：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- partial(<span class="string">"baidu_tongji"</span>) %&gt;</span><br></pre></td></tr></table></figure></p>
-<p>— 未完待续 —</p>
+<h2 id="404_u9875_u9762"><a href="#404_u9875_u9762" class="headerlink" title="404页面"></a>404页面</h2><p>直接在themes\landscape\source目录下创建404.html，但是自定义404页面仅对绑定顶级域名的项目起作用，GitHub默认分配的二级域名以及使用hexo server在本机调试均不起作用。<br>本博客的<a href="http://yurixu.com/404.html">404页面</a>。还可以选择公益404页面，例如：<br>[1] <a href="http://www.qq.com/404/" target="_blank" rel="external">腾讯公益404</a><br>[2] <a href="http://yibo.iyiyun.com/Index/web404" target="_blank" rel="external">益云404</a><br>[3] <a href="http://404page.missingkids.org.tw/" target="_blank" rel="external">失蹤兒童少年資料管理中心404</a></p>
+<h2 id="u56FE_u5E8A"><a href="#u56FE_u5E8A" class="headerlink" title="图床"></a>图床</h2><p>图床我使用的是七牛云存储，速度还不错。可以将首页背景图片放置到七牛上，获取存储地址，找到themes\landscape\source\css_variables.sty第39行：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">banner-url = <span class="string">"images/banner.jpg"</span></span><br></pre></td></tr></table></figure></p>
+<p>修改为你在七牛中存储的图片文件地址。</p>
+<h2 id="u9875_u9762_u7EDF_u8BA1"><a href="#u9875_u9762_u7EDF_u8BA1" class="headerlink" title="页面统计"></a>页面统计</h2><p>页面统计使用<a href="http://busuanzi.ibruce.info/" target="_blank" rel="external">不蒜子</a>提供的服务。<br>打开themes\landscape\layout_partial\footer.ejs，在最底部添加：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src=<span class="string">"//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>不蒜子提供两种统计方式：pv和uv，而且提供总站pv/uv访问量统计和单页面pv访问量统计。<br>总站pv：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;span id=<span class="string">"busuanzi_container_site_pv"</span>&gt;</span><br><span class="line">    本站总访问量&lt;span id=<span class="string">"busuanzi_value_site_pv"</span>&gt;&lt;/span&gt;次</span><br><span class="line">&lt;/span&gt;</span><br></pre></td></tr></table></figure></p>
+<p>总站uv：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;span id=<span class="string">"busuanzi_container_site_uv"</span>&gt;</span><br><span class="line">  本站访客数&lt;span id=<span class="string">"busuanzi_value_site_uv"</span>&gt;&lt;/span&gt;人次</span><br><span class="line">&lt;/span&gt;</span><br></pre></td></tr></table></figure></p>
+<p>单页面pv：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;span id=<span class="string">"busuanzi_container_page_pv"</span>&gt;</span><br><span class="line">  本文总阅读量&lt;span id=<span class="string">"busuanzi_value_page_pv"</span>&gt;&lt;/span&gt;次</span><br><span class="line">&lt;/span&gt;</span><br></pre></td></tr></table></figure></p>
+<p>关于博客细节性优化，例如字体、代码块、版权信息等，我将会在下一节<a href="http://localhost:4000/blog/2016/01/05/Hexo搭建个人博客（三）/" target="_blank" rel="external">Hexo搭建个人博客（四）</a>介绍。</p>
 
       
     </div>
     <footer class="article-footer">
       <!-- modify by yurixu 2016/1/1 replace Share -->
-      <a data-url="http://yurixu.com/blog/2016/01/05/Hexo搭建个人博客（三）/" data-id="cij2y2o66000264uqvbvz6lh9" class="article-share-link bdsharebuttonbox" data-cmd="more">分享</a>
+      <a data-url="http://yurixu.com/blog/2016/01/05/Hexo搭建个人博客（三）/" data-id="cij2zft7p000398uq5o0r6e5j" class="article-share-link bdsharebuttonbox" data-cmd="more">分享</a>
       <script>
       window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
       </script>
@@ -171,11 +178,24 @@ var _hmt = _hmt || [];
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
 
+      <!--添加单篇文章阅读量统计-->
+      <span id="busuanzi_container_page_pv">
+        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+      </span>
     </footer>
   </div>
   
     
 <nav id="article-nav">
+  
+    <a href="/blog/2016/01/06/Hexo搭建个人博客（四）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hexo搭建个人博客（四）
+        
+      </div>
+    </a>
   
   
     <a href="/blog/2016/01/04/Hexo搭建个人博客（二）/" id="article-nav-older" class="article-nav-link-wrap">
@@ -218,7 +238,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -227,7 +247,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -245,7 +265,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -255,6 +275,10 @@ var _hmt = _hmt || [];
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2016/01/06/Hexo搭建个人博客（四）/">Hexo搭建个人博客（四）</a>
+          </li>
         
           <li>
             <a href="/blog/2016/01/05/Hexo搭建个人博客（三）/">Hexo搭建个人博客（三）</a>
