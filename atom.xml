@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Walk step by step]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yurixu.com/"/>
-  <updated>2016-01-05T23:48:38.780Z</updated>
+  <updated>2016-01-06T01:09:07.828Z</updated>
   <id>http://yurixu.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yurixu.com/blog/2016/01/05/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89/"/>
     <id>http://yurixu.com/blog/2016/01/05/Hexo搭建个人博客（三）/</id>
     <published>2016-01-05T14:34:36.000Z</published>
-    <updated>2016-01-05T23:48:38.780Z</updated>
+    <updated>2016-01-06T01:09:07.828Z</updated>
     <content type="html"><![CDATA[<p><img src="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png" alt=""></p>
 <p>本文详细介绍了如何发布文章以及如何打造个性化Hexo博客。<br><a id="more"></a></p>
 <h2 id="u5982_u4F55_u53D1_u5E03_u6587_u7AE0"><a href="#u5982_u4F55_u53D1_u5E03_u6587_u7AE0" class="headerlink" title="如何发布文章"></a>如何发布文章</h2><p>执行hexo new命令会在hexo/source/_posts/目录下生成指定名称的文章。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> [layout] <span class="string">"post_name"</span> <span class="comment">#新建文章</span></span><br></pre></td></tr></table></figure></p>
@@ -30,7 +30,7 @@
 <p>此时会在source下生成一个新文件夹about，编辑about中的index.md即可对“关于”显示的内容进行制定；同时在主题配置文件_config.yml中添加“关于”的导航菜单和链接：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 头部菜单</span></span><br><span class="line">menu:</span><br><span class="line">  Home: /</span><br><span class="line">  Archives: /archives</span><br><span class="line">  Reading: /read</span><br><span class="line">  GitHub: https:<span class="comment">//github.com/xuyuri</span></span><br><span class="line">  RSS: /atom.xml</span><br><span class="line">  About:  /about 	<span class="comment">#关于</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="u6587_u7AE0_u6458_u8981"><a href="#u6587_u7AE0_u6458_u8981" class="headerlink" title="文章摘要"></a>文章摘要</h2><p>文章默认是不显示摘要信息的，在需要显示摘要的地方添加以下代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">以上是摘要</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">以下是余下全文</span><br></pre></td></tr></table></figure></p>
 <p>more以上内容即是摘要信息，显示在主页中，点击『Read More』链接打开全文。还可以将『Read More』更换成自己喜欢的文字，修改主题配置文件_config.yml中的excerpt_link配置项即可：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Content</span></span><br><span class="line">excerpt_link: Read More 	<span class="comment">#摘要链接文字</span></span><br></pre></td></tr></table></figure></p>
-<p>— 未完待续 —</p>
+<h2 id="u66FF_u6362Google_u6E90"><a href="#u66FF_u6362Google_u6E90" class="headerlink" title="替换Google源"></a>替换Google源</h2><p>— 未完待续 —</p>
 ]]></content>
     <summary type="html">
     <![CDATA[本文详细介绍了如何发布文章以及如何打造个性化博客。]]>

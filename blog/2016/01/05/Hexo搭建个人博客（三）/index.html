@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Yuri's Blog">
 <meta property="og:description" content="本文详细介绍了如何发布文章以及如何打造个性化博客。">
 <meta property="og:image" content="http://7xj5r6.com1.z0.glb.clouddn.com/hexo.png">
-<meta property="og:updated_time" content="2016-01-05T23:48:38.780Z">
+<meta property="og:updated_time" content="2016-01-06T01:09:07.828Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo搭建个人博客（三）">
 <meta name="twitter:description" content="本文详细介绍了如何发布文章以及如何打造个性化博客。">
@@ -125,13 +125,13 @@ var _hmt = _hmt || [];
 <p>此时会在source下生成一个新文件夹about，编辑about中的index.md即可对“关于”显示的内容进行制定；同时在主题配置文件_config.yml中添加“关于”的导航菜单和链接：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 头部菜单</span></span><br><span class="line">menu:</span><br><span class="line">  Home: /</span><br><span class="line">  Archives: /archives</span><br><span class="line">  Reading: /read</span><br><span class="line">  GitHub: https:<span class="comment">//github.com/xuyuri</span></span><br><span class="line">  RSS: /atom.xml</span><br><span class="line">  About:  /about 	<span class="comment">#关于</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="u6587_u7AE0_u6458_u8981"><a href="#u6587_u7AE0_u6458_u8981" class="headerlink" title="文章摘要"></a>文章摘要</h2><p>文章默认是不显示摘要信息的，在需要显示摘要的地方添加以下代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">以上是摘要</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">以下是余下全文</span><br></pre></td></tr></table></figure></p>
 <p>more以上内容即是摘要信息，显示在主页中，点击『Read More』链接打开全文。还可以将『Read More』更换成自己喜欢的文字，修改主题配置文件_config.yml中的excerpt_link配置项即可：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Content</span></span><br><span class="line">excerpt_link: Read More 	<span class="comment">#摘要链接文字</span></span><br></pre></td></tr></table></figure></p>
-<p>— 未完待续 —</p>
+<h2 id="u66FF_u6362Google_u6E90"><a href="#u66FF_u6362Google_u6E90" class="headerlink" title="替换Google源"></a>替换Google源</h2><p>— 未完待续 —</p>
 
       
     </div>
     <footer class="article-footer">
       <!-- modify by yurixu 2016/1/1 replace Share -->
-      <a data-url="http://yurixu.com/blog/2016/01/05/Hexo搭建个人博客（三）/" data-id="cij24ci22000280rbl4lhejfa" class="article-share-link bdsharebuttonbox" data-cmd="more">Share</a>
+      <a data-url="http://yurixu.com/blog/2016/01/05/Hexo搭建个人博客（三）/" data-id="cij24ry4b000218rbddhehf19" class="article-share-link bdsharebuttonbox" data-cmd="more">Share</a>
       <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
@@ -299,8 +299,13 @@ var _hmt = _hmt || [];
   
 </nav>
     
+//add by yurixu 替换Google的jquery并且添加判断逻辑
 
-<script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+</script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
