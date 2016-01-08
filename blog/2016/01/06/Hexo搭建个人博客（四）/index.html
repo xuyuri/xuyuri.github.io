@@ -80,7 +80,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <! --modify by yurixu 22016/1/8 修改search为swiftype -->
+        <!-- <a id="nav-search-btn" class="nav-icon" title="Search"></a> -->
+        <input type="text" class="st-default-search-input">
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yurixu.com"></form>
@@ -163,7 +165,7 @@ var _hmt = _hmt || [];
     </div>
     <footer class="article-footer">
       <!-- modify by yurixu 2016/1/1 replace Share -->
-      <a data-url="http://yurixu.com/blog/2016/01/06/Hexo搭建个人博客（四）/" data-id="cij4wyq040002zwuqhdmuyhy0" class="article-share-link bdsharebuttonbox" data-cmd="more">分享</a>
+      <a data-url="http://yurixu.com/blog/2016/01/06/Hexo搭建个人博客（四）/" data-id="cij4yyda40002gorbmya5cqdw" class="article-share-link bdsharebuttonbox" data-cmd="more">分享</a>
       <script>
       window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
       </script>
@@ -339,7 +341,7 @@ var _hmt = _hmt || [];
   
 </nav>
     
-//add by yurixu 替换Google的jquery并且添加判断逻辑
+< !-- add by yurixu 替换Google的jquery并且添加判断逻辑 -->
 <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript">
 if (typeof jQuery == 'undefined') {
@@ -353,6 +355,15 @@ if (typeof jQuery == 'undefined') {
 
 
 <script src="/js/script.js" type="text/javascript"></script>
+<!-- add by yurixu 2016/1/8 添加swiftype搜索代码 -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','Fa9mKyRrtZcNX19oWoxv','2.0.0');
+</script>
 
   </div>
 </body>
