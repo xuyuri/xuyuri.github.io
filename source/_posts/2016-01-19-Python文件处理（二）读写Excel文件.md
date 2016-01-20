@@ -11,6 +11,18 @@ description: 本文首先介绍Python读写Excel的基本函数，最后通过�
 本文首先介绍如何利用Python进行文件读写操作，最后通过实例讲解基本用法。
 <!-- more -->
 
+## 基础知识
+### 背景介绍
+一日，见女票在处理实验仪器输出的Excel文档，反复的从一个Excel中拷贝粘贴的另一个Excel，作为程序猿的我实在无法忍受这种低效率的行为（程序猿行动指南：一切能交给机器做的事情，就不用人类去操心！），于是用Python写了个读写Excel的工具供女票使用
+
+### 函数汇总
+
+### 读Excel
+
+### 写Excel
+
+## 实战
+
 写在最后：
 [1] [python操作Excel读写--使用xlrd](http://www.cnblogs.com/lhj588/archive/2012/01/06/2314181.html)
 [2] [Python 使用 xlrd 读取 Excel格式文件](http://www.pythonclub.org/python-files/excel)
