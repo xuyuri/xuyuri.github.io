@@ -1,8 +1,10 @@
-title: read
-date: 2016-01-02 22:55:46
-categories:
+---
+layout: book
+title: 2015年阅读书单
+category: 读书
+keywords: 阅读,书单,2015
 books: 
-	- title: 计算广告
+    - title: 计算广告
       status: 在读
       author: 刘鹏 王超
       publisher: 人民邮电出版社
@@ -83,3 +85,9 @@ books:
       cover: http://img4.douban.com/lpic/s4594868.jpg
       description: 我甚至现在就能清楚地看见，一旦有一天我不得不长久地离开它，我会怎样想念它，我会怎样想念它并且梦见它，我会怎样因为不敢想念它而梦也梦不到它。宇宙以其不息的欲望将一个歌舞炼为永恒。这欲望有怎样一个人间的姓名，大可忽略不计。每个人的地坛都不一样吧，到最后，也不是我在地坛，而是地坛在我。
 ---
+
+
+
+
+     
+  
