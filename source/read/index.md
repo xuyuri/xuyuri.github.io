@@ -1,7 +1,6 @@
 layout: read
 title: 2015年阅读书单
 category: 读书
-keywords: 阅读,书单,2015
 books: 
     - title: 计算广告
       status: 在读
