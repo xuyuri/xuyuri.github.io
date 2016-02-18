@@ -2,7 +2,7 @@
 menu:
   Home: /
   Archives: /archives
-  Reading: /read
+  Reading: /categories/Read/
   GitHub: https://github.com/xuyuri
   RSS: /atom.xml
   About:  /about  

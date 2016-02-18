@@ -83,3 +83,5 @@ deploy:
   type: git 					#类型，要使用git
   repo: git@github.com:xuyuri/xuyuri.github.io.git 	#仓库SSH链接
   branch: master
+
+
