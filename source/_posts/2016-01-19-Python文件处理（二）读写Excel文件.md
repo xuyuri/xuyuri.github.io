@@ -13,7 +13,20 @@ description: 本文首先介绍Python读写Excel的基本函数，最后通过�
 
 ## 基础知识
 ### 背景介绍
-一日，见女票在处理实验仪器输出的Excel文档，反复的从一个Excel中拷贝粘贴的另一个Excel，作为程序猿的我实在无法忍受这种低效率的行为（程序猿行动指南：一切能交给机器做的事情，就不用人类去操心！），于是用Python写了个读写Excel的工具供女票使用
+一日，见女票在处理实验仪器输出的Excel文档，反复从一个Excel中拷贝数据粘贴到另一个Excel中，作为程序猿的我实在无法忍受这种低效率的行为（程序猿行动指南：一切能交给机器做的事情，就不用人类去操心！），于是用Python写了个读写Excel的工具供女票使用，下文首先讲解Python读写Excel的基本知识，最后附工具代码。
+读Excel，本文使用xlrd模块；
+写Excel，本文介绍两种模块：pyExcelerator和xlwt。
+
+- 安装
+
+xlrd：[https://pypi.python.org/pypi/xlrd](https://pypi.python.org/pypi/xlrd)
+xlwt：[https://pypi.python.org/pypi/xlwt/#downloads](https://pypi.python.org/pypi/xlwt/#downloads)
+pyExcelerator：[https://pypi.python.org/pypi/pyExcelerator/](https://pypi.python.org/pypi/pyExcelerator/)
+
+下载源码后，解压，安装：
+```python
+python setup.py install
+```
 
 ### 函数汇总
 
@@ -33,4 +46,6 @@ description: 本文首先介绍Python读写Excel的基本函数，最后通过�
 [7] [Microsoft Excel File Format](http://www.openoffice.org/sc/excelfileformat.pdf)
 [8] [Working with Excel files in Python ](http://www.simplistix.co.uk/presentations/python-excel.pdf)
 [9] [Python and Excel](http://www.simplistix.co.uk/presentations/python_excel_09/excel-lightning.pdf)
+[10] [Working with Excel Files in Python](http://www.python-excel.org/)
+[11] [xlwt documentation](http://xlwt.readthedocs.org/en/latest/)
 ---- 未完待续 ----
