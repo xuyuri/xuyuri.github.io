@@ -1,3 +1,64 @@
+<table class="table table-bordered table-striped table-condensed">
+   <tr>      
+     <th colspan="4" bgcolor="F5F5F5" style="font-size:15px; padding:5px">2016上半年读书计划</th>     
+   </tr>
+   <tr>
+      <td width="20%" style="text-align:center; font-weight:bold">内容</td>
+      <td width="20%" style="text-align:center; font-weight:bold">月份</td>
+      <td width="40%" style="text-align:center; font-weight:bold">书单</td>
+      <td width="20%" style="text-align:center; font-weight:bold">完成情况</td>
+   </tr>
+   <tr>
+      <td rowspan="4" style="text-align:center">PHP</td>
+      <td width="20%" style="text-align:center">2016年3月</td>
+      <td width="40%" style="text-align:center">PHP和MySQL Web开发</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#5BC0DE; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">进行中</label></td>
+   </tr>
+   <tr>      
+      <td rowspan='3' width="20%" style="text-align:center">2016年4月</td>
+      <td width="40%" style="text-align:center">PHP核心技术与最佳实践</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#777777; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">未开始</label></td>
+   </tr>
+   <tr>
+      <td width="40%" style="text-align:center">高性能PHP应用开发</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#777777; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">未开始</label></td>
+   </tr>
+   <tr>
+      <td width="40%" style="text-align:center">SQL注入攻击与防御</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#777777; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">未开始</label></td>
+   </tr>
+   <tr>
+      <td rowspan="4" style="text-align:center">MySQL</td>
+      <td width="20%" style="text-align:center">2016年5月</td>
+      <td width="40%" style="text-align:center">MySQL入门很简单</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#777777; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">未开始</label></td>
+   </tr>
+   <tr>     
+      <td rowspan='3' width="20%" style="text-align:center">2016年6月</td>
+      <td width="40%" style="text-align:center">MySQL必知必会</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#777777; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">未开始</label></td>
+   </tr>
+   <tr>
+      <td width="40%" style="text-align:center">高性能MySQL:第3版</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#777777; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">未开始</label></td>
+   </tr>
+   <tr>
+      <td width="40%" style="text-align:center">SQL注入攻击与防御</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#777777; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">未开始</label></td>
+   </tr>
+   <tr>
+      <td rowspan="2" style="text-align:center">沟通+理财</td>
+      <td width="20%" style="text-align:center">2016年3-4月</td>
+      <td width="40%" style="text-align:center">学会提问</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#5BC0DE; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">进行中</label></td>
+   </tr>
+   <tr>     
+      <td width="20%" style="text-align:center">2016年5-6月</td>
+      <td width="40%" style="text-align:center">富爸爸穷爸爸</td>
+      <td width="20%" style="text-align:center"><label style="background-color:#777777; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">未开始</label></td>
+   </tr>   
+</table>
+
 <table>
    <tr>
       <th colspan="3" bgcolor="F5F5F5" style="font-size:15px; padding:5px">PHP和MySQL Web开发(原书第4版)</th>
