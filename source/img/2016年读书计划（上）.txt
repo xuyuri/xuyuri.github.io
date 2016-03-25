@@ -398,7 +398,7 @@
    </tr>
    <tr>
       <td>书评：</td>
-      <td>不建议读，各种摆大道理</td>
+      <td>[《沟通的艺术》读书笔记](http://yurixu.com/blog/2016/03/19/%E3%80%8A%E6%B2%9F%E9%80%9A%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/)不建议读，各种摆大道理</td>
    </tr>
 </table>
 <table>
