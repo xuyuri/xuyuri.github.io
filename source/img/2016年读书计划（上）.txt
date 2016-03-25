@@ -397,8 +397,8 @@
       <td><label style="background-color:#5CB85C; color:white; padding:2px 5px 2px 5px; border-radius: 3px;">已 读</label></td>  
    </tr>
    <tr>
-      <td>书评：不建议读，各种摆大道理</td>
-      <td></td>
+      <td>书评：</td>
+      <td>不建议读，各种摆大道理</td>
    </tr>
 </table>
 <table>
