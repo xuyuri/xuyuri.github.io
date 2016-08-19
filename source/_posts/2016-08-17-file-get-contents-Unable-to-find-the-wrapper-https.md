@@ -5,7 +5,7 @@ categories: PHP
 tags: issue
 description: file_get_contents如何支持Https链接
 ---
-![](http://7xrc03.com1.z0.glb.clouddn.com/Https.jpg)
+![](http://7xrc03.com1.z0.glb.clouddn.com/HTTPS.jpg)
 使用file_get_contents向https类型的链接发送构造的请求头，返回：
 `Warning: file_get_contents(): Unable to find the wrapper "https" - did you forget to enable it when you configured PHP? `
 
