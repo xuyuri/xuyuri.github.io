@@ -38,4 +38,4 @@ wrappers: array(11) {
 extension=php_openssl.dll
 allow_url_fopen = On
 ```
-转载请注明出处：
+转载请注明出处：[http://yurixu.com/blog/2016/08/17/file-get-contents-Unable-to-find-the-wrapper-https/](http://yurixu.com/blog/2016/08/17/file-get-contents-Unable-to-find-the-wrapper-https/)

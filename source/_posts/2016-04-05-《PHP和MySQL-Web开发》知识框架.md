@@ -6,7 +6,7 @@ tags: [Python, MySQL]
 description:
 ---
 
-![](img/PHP和MySQL Web开发.jpg)
+![](http://7xr2qq.com1.z0.glb.clouddn.com/PHP%E5%92%8CMySQL%20Web%E5%BC%80%E5%8F%91.jpg)
 ## 序言
 《PHP和MySQL Web开发》算是PHP的经典入门书了，这个月把它读了两遍，顺便整理下整本书的知识体系。
 <!-- more -->
