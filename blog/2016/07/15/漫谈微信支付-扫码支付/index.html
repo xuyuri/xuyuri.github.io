@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>漫谈微信支付-扫码支付 | Yuri&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="漫谈微信支付-扫码支付">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漫谈微信支付-扫码支付">
+<meta property="og:url" content="http://yurixu.com/blog/2016/07/15/漫谈微信支付-扫码支付/index.html">
+<meta property="og:site_name" content="Yuri's Blog">
+<meta property="og:description" content="漫谈微信支付-扫码支付">
+<meta property="og:image" content="http://7xrc03.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98.jpeg">
+<meta property="og:image" content="http://7xrc03.com1.z0.glb.clouddn.com/%E6%89%AB%E7%A0%81%E6%94%AF%E4%BB%98-%E5%9B%9E%E8%B0%83.png">
+<meta property="og:updated_time" content="2018-05-22T02:15:12.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="漫谈微信支付-扫码支付">
+<meta name="twitter:description" content="漫谈微信支付-扫码支付">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <!--link href="//fonts.useso.com/css?family=Lato:400,400italic" rel="stylesheet" type="text/css"-->
+  <link href="http://yurixu.com/css/fonts/Google/font.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">  
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?3da38d5511434722ab5f79d1cffab2ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  <!--
+
+-->
+  
+
+  <!-- add by yurixu 2016/1/13 向百度提交sitemap-->
+  <meta name="baidu-site-verification" content="ubBCJmBrxD" />
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Yuri&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Walk step by step</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories/Read/">Reading</a>
+        
+          <a class="main-nav-link" href="https://github.com/xuyuri">GitHub</a>
+        
+          <a class="main-nav-link" href="/atom.xml">RSS</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <! --modify by yurixu 22016/1/8 修改search为swiftype -->
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <!-- <input type="text" class="st-default-search-input"> -->
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yurixu.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-漫谈微信支付-扫码支付" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      漫谈微信支付-扫码支付
+    </h1>
+  
+
+      </header>
+    
+    <!-- add by yurixu 2016/1/3 将文章时间放在标题下 -->
+    <div class="article-meta">
+      <a href="/blog/2016/07/15/漫谈微信支付-扫码支付/" class="article-date">
+  <time datetime="2016-07-14T23:56:20.000Z" itemprop="datePublished">2016-7-15 周五  07:56</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- add by yurixu 2016/1/3 添加文章目录 -->
+        
+        <p><img src="http://7xrc03.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98.jpeg" alt=""><br>本文对微信扫码支付的实现过程进行详细介绍。<br><a id="more"></a></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>扫码支付应用于在各种场景下进行二维码支付，支付流程一般为：</p>
+<ul>
+<li>商户根据微信支付规则为不同商品生成二维码；</li>
+<li>用户使用微信扫一扫功能，扫码获取商品支付信息；</li>
+<li>用户输入支付密码，完成支付；</li>
+<li>用户微信客户端收到支付成功通知，微信后台将支付结果异步回调给商户后台。</li>
+</ul>
+<hr>
+<h2 id="支付模式"><a href="#支付模式" class="headerlink" title="支付模式"></a>支付模式</h2><p>根据应用场景的不同，微信提供了两种扫码支付模式：<br><strong>模式一：</strong><br>商户将productid（可定义为产品标识或订单号）作为参数根据微信支付规则事先生成固定的二维码，商户可将此二维码打印张贴，方便用户线下扫码支付。<br>用户扫码后，微信支付系统会将用户openid和商户定义的productid返回给商户在微信公共平台配置的回调地址，商户根据productid生成微信支付交易，最后微信支付系统发起用户支付流程。<br><strong>模式二：</strong><br>商户后台主动发起调用微信支付<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1" target="_blank" rel="external">统一下单</a>接口生成预付交易，并将接口返回的短连接生成二维码，用户扫码后输入密码完成支付交易。</p>
+<hr>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h3 id="模式一："><a href="#模式一：" class="headerlink" title="模式一："></a>模式一：</h3><ul>
+<li>准备工作：<br>模式一需要在微信公共平台配置回调地址：微信公共平台-&gt;微信支付-&gt;开发配置<br><img src="http://7xrc03.com1.z0.glb.clouddn.com/%E6%89%AB%E7%A0%81%E6%94%AF%E4%BB%98-%E5%9B%9E%E8%B0%83.png" alt="模式一回调配置"></li>
+<li><p>开发流程：<br>◆ 商户后台根据微信支付规则生成二维码，展示给用户；<br>◆ 用户扫描二维码，微信支付系统将用户openid和productid以参数方式回调商户在公共平台设置的回调地址；<br>◆ 商户后台系统接收到微信回调请求，根据接收到openid和productid生成商户订单；<br>◆ 商户后台调用微信支付<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1" target="_blank" rel="external">统一下单</a>接口获取预付交易id（prepay_id）；<br>◆ 微信支付系统根据商户统一下单请求生成预支付交易，返回prepay_id；<br>◆ 商户系统得到prepay_id后返回给微信支付系统；<br>◆ 微信支付系统接收到prepay_id后发起用户端微信支付流程（拉起微信支付，输入密码，完成扣款）；<br>◆ 微信支付系统完成交易后向用户微信客户端发送支付结果通知；<br>◆ 微信支付系统通过发送异步消息，将支付结果发送至商户统一下单时填写的回调地址；<br>◆ 商户确认微信支付结果并更新订单状态，如商户后台未收到微信支付结果通知，可以通过调用<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_2" target="_blank" rel="external">查询订单</a>接口主动查询订单支付结果。</p>
+</li>
+<li><p>实现<br>◆ 所需文件<br>lib/* ：PHP-SDK lib文件夹；<br>WxPay.NativePay.php：扫码支付实现类；</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span> <span class="string">"wxPay/WxPay.Api.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 扫码支付实现类</span><br><span class="line"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NativePay</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="comment">/**</span><br><span class="line">   * </span><br><span class="line">   * 生成扫描支付URL,模式一</span><br><span class="line">   * <span class="doctag">@param</span> BizPayUrlInput $bizUrlInfo</span><br><span class="line">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">GetPrePayUrl</span><span class="params">(<span class="variable">$productId</span>)</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    <span class="variable">$biz</span> = <span class="keyword">new</span> WxPayBizPayUrl();</span><br><span class="line">    <span class="variable">$biz</span>-&gt;SetProduct_id(<span class="variable">$productId</span>);</span><br><span class="line">    <span class="variable">$values</span> = WxpayApi::bizpayurl(<span class="variable">$biz</span>);</span><br><span class="line">    <span class="variable">$url</span> = <span class="string">"weixin://wxpay/bizpayurl?"</span> . <span class="variable">$this</span>-&gt;ToUrlParams(<span class="variable">$values</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$url</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/**</span><br><span class="line">   * </span><br><span class="line">   * 参数数组转换为url参数</span><br><span class="line">   * <span class="doctag">@param</span> array $urlObj</span><br><span class="line">   */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">ToUrlParams</span><span class="params">(<span class="variable">$urlObj</span>)</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    <span class="variable">$buff</span> = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$urlObj</span> <span class="keyword">as</span> <span class="variable">$k</span> =&gt; <span class="variable">$v</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="variable">$buff</span> .= <span class="variable">$k</span> . <span class="string">"="</span> . <span class="variable">$v</span> . <span class="string">"&amp;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="variable">$buff</span> = trim(<span class="variable">$buff</span>, <span class="string">"&amp;"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$buff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/**</span><br><span class="line">   * </span><br><span class="line">   * 生成直接支付url，支付url有效期为2小时,模式二</span><br><span class="line">   * <span class="doctag">@param</span> UnifiedOrderInput $input</span><br><span class="line">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">GetPayUrl</span><span class="params">(<span class="variable">$input</span>)</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$input</span>-&gt;GetTrade_type() == <span class="string">"NATIVE"</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="variable">$result</span> = WxPayApi::unifiedOrder(<span class="variable">$input</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>◆ 生成二维码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$productid</span> = <span class="string">'123456789'</span>;</span><br><span class="line"><span class="variable">$notify</span> = <span class="keyword">new</span> NativePay();</span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$notify</span>-&gt;GetPrePayUrl(<span class="variable">$productid</span>);</span><br></pre></td></tr></table></figure></p>
+<p>返回的二维码链接格式为：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weixin://wxpay/bizpayurl?appid=wx426b3015555a46be&amp;mch_id=1225312702&amp;nonce_str=hscvjb7ljo9h53hsn97qhszd5wh5aja6&amp;product_id=123456789&amp;time_stamp=1468641555&amp;sign=47FE32AA7DF1249D92353F1B6D79391A</span><br></pre></td></tr></table></figure></p>
+<p>使用QRcode将链接转换为二维码。</p>
+<p>◆ 扫码支付回调<br>用户扫码完成后，微信支付系统会将用户openid和productid发送至该回调接口，该回调接口接收到微信回调请求后需要完成：<br>1） 调用微信支付统一下单接口获得prepay_id；<br>2） 将prepay_id返回给微信服务器。<br>首先创建实现微信扫码支付模式一的回调接口类<code>NativeNotifyCallBack</code>:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NativeNotifyCallBack</span> <span class="keyword">extends</span> <span class="title">WxPayNotify</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">unifiedorder</span><span class="params">(<span class="variable">$openId</span>, <span class="variable">$product_id</span>)</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    <span class="comment">//统一下单</span></span><br><span class="line">    <span class="variable">$input</span> = <span class="keyword">new</span> WxPayUnifiedOrder();</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetBody(<span class="string">"test"</span>);</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetAttach(<span class="string">"test"</span>);</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetOut_trade_no(WxPayConfig::MCHID.date(<span class="string">"YmdHis"</span>));</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetTotal_fee(<span class="string">"1"</span>);</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetTime_start(date(<span class="string">"YmdHis"</span>));</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetTime_expire(date(<span class="string">"YmdHis"</span>, time() + <span class="number">600</span>));</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetGoods_tag(<span class="string">"test"</span>);		</span><br><span class="line">    <span class="comment">//设置微信支付结果通知回调地址</span></span><br><span class="line">    <span class="variable">$input</span>-&gt;SetNotify_url(<span class="string">"http://XXX.com/test/WxPayCallBack"</span>);</span><br><span class="line">    <span class="comment">//扫码支付的trade_type要设置为NATIVE</span></span><br><span class="line">    <span class="variable">$input</span>-&gt;SetTrade_type(<span class="string">"NATIVE"</span>);</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetOpenid(<span class="variable">$openId</span>);</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetProduct_id(<span class="variable">$product_id</span>);</span><br><span class="line">    <span class="variable">$result</span> = WxPayApi::unifiedOrder(<span class="variable">$input</span>);		</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">NotifyProcess</span><span class="params">(<span class="variable">$data</span>, &amp;<span class="variable">$msg</span>)</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    <span class="comment">//echo "处理回调";		</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(!array_key_exists(<span class="string">"openid"</span>, <span class="variable">$data</span>) ||</span><br><span class="line">      !array_key_exists(<span class="string">"product_id"</span>, <span class="variable">$data</span>))</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="variable">$msg</span> = <span class="string">"回调数据异常"</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="variable">$openid</span> = <span class="variable">$data</span>[<span class="string">"openid"</span>];</span><br><span class="line">    <span class="variable">$product_id</span> = <span class="variable">$data</span>[<span class="string">"product_id"</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//统一下单</span></span><br><span class="line">    <span class="variable">$result</span> = <span class="variable">$this</span>-&gt;unifiedorder(<span class="variable">$openid</span>, <span class="variable">$product_id</span>);</span><br><span class="line">    <span class="keyword">if</span>(!array_key_exists(<span class="string">"appid"</span>, <span class="variable">$result</span>) ||</span><br><span class="line">       !array_key_exists(<span class="string">"mch_id"</span>, <span class="variable">$result</span>) ||</span><br><span class="line">       !array_key_exists(<span class="string">"prepay_id"</span>, <span class="variable">$result</span>))</span><br><span class="line">    &#123;</span><br><span class="line">     	<span class="variable">$msg</span> = <span class="string">"统一下单失败"</span>;</span><br><span class="line">     	<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">     &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="variable">$this</span>-&gt;SetData(<span class="string">"appid"</span>, <span class="variable">$result</span>[<span class="string">"appid"</span>]);</span><br><span class="line">    <span class="variable">$this</span>-&gt;SetData(<span class="string">"mch_id"</span>, <span class="variable">$result</span>[<span class="string">"mch_id"</span>]);</span><br><span class="line">    <span class="variable">$this</span>-&gt;SetData(<span class="string">"nonce_str"</span>, WxPayApi::getNonceStr());</span><br><span class="line">    <span class="variable">$this</span>-&gt;SetData(<span class="string">"prepay_id"</span>, <span class="variable">$result</span>[<span class="string">"prepay_id"</span>]);</span><br><span class="line">    <span class="variable">$this</span>-&gt;SetData(<span class="string">"result_code"</span>, <span class="string">"SUCCESS"</span>);</span><br><span class="line">    <span class="variable">$this</span>-&gt;SetData(<span class="string">"err_code_des"</span>, <span class="string">"OK"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在上一节<a href="http://yurixu.com/blog/2016/06/28/%E6%BC%AB%E8%B0%88%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/">漫谈微信支付</a>中介绍过微信回调基础类<code>WxPayNotify</code>，支付模式一的回调类<code>NativeNotifyCallBack</code>继承自<code>WxPayNotify</code>，NativeNotifyCallBack需要实现基类中定义的方法<code>NotifyProcess</code>进行回调逻辑处理。<br><code>NativeNotifyCallBack</code>中<code>NotifyProcess</code>首先获取openid和product_id，然后传递给<code>unifiedorder</code>方法完成统一下单：<br><code>$result = $this-&gt;unifiedorder($openid, $product_id);</code>接收统一下单返回的结果，并将appid、mch_id、nonce_str、prepay_id等信息返回给微信。</p>
+<p>回调方法：<br>假设商户在公共号平台设置的回调地址为：<code>http://XXX.com/test/NativeCallBack</code><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionNativeCallBack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="variable">$notify</span> = <span class="keyword">new</span> NativeNotifyCallBack();</span><br><span class="line">  <span class="variable">$notify</span>-&gt;Handle(<span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>◆ 支付结果回调<br>支付结果回调用于接收微信服务器发送的支付结果通知，商户后台可能还需要执行更新订单状态以及其他操作。在统一下单接口中通过SetNotify_url进行设置。<br>首先定义处理微信支付结果的回调类<code>PayNotifyCallBack</code>:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PayNotifyCallBack</span> <span class="keyword">extends</span> <span class="title">WxPayNotify</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="comment">//查询订单</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">Queryorder</span><span class="params">(<span class="variable">$transaction_id</span>)</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    <span class="variable">$input</span> = <span class="keyword">new</span> WxPayOrderQuery();</span><br><span class="line">    <span class="variable">$input</span>-&gt;SetTransaction_id(<span class="variable">$transaction_id</span>);</span><br><span class="line">    <span class="variable">$result</span> = WxPayApi::orderQuery(<span class="variable">$input</span>);		</span><br><span class="line">    <span class="keyword">if</span>(array_key_exists(<span class="string">"return_code"</span>, <span class="variable">$result</span>)</span><br><span class="line">      &amp;&amp; array_key_exists(<span class="string">"result_code"</span>, <span class="variable">$result</span>)</span><br><span class="line">      &amp;&amp; <span class="variable">$result</span>[<span class="string">"return_code"</span>] == <span class="string">"SUCCESS"</span></span><br><span class="line">      &amp;&amp; <span class="variable">$result</span>[<span class="string">"result_code"</span>] == <span class="string">"SUCCESS"</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//重写回调处理函数</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">NotifyProcess</span><span class="params">(<span class="variable">$data</span>, &amp;<span class="variable">$msg</span>)</span></span><br><span class="line">  </span>&#123;		</span><br><span class="line">    <span class="variable">$notfiyOutput</span> = <span class="keyword">array</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(!array_key_exists(<span class="string">"transaction_id"</span>, <span class="variable">$data</span>))&#123;</span><br><span class="line">      <span class="variable">$msg</span> = <span class="string">"输入参数不正确"</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//查询订单，判断订单真实性</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="variable">$this</span>-&gt;Queryorder(<span class="variable">$data</span>[<span class="string">"transaction_id"</span>]))&#123;</span><br><span class="line">      <span class="variable">$msg</span> = <span class="string">"订单查询失败"</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>PayNotifyCallBack</code>同样继承自<code>WxPayNotify</code>，需要重写<code>NotifyProcess</code>方法。在微信支付结果回调中，<code>NotifyProcess</code>需要完成的操作是调用<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_2" target="_blank" rel="external">查询订单</a>接口，主动查询微信端订单状态。<br>◆ 回调并发控制<br>假设统一下单接口中定义的回调地址为：<code>http://XXX.com/test/WxPayCallBack</code>,<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">    * 微信支付回调函数</span><br><span class="line">    * <span class="doctag">@author</span> yuri 2015/6/26</span><br><span class="line">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionWxPayCallBack</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">require_once</span> <span class="string">"WxPay.PayNotifyCallBack.php"</span>;</span><br><span class="line">       <span class="variable">$notify</span> = <span class="keyword">new</span> PayNotifyCallBack();</span><br><span class="line">       <span class="variable">$notify</span>-&gt;Handle(<span class="keyword">true</span>);        </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>多数情况下商户后台在接收到微信支付结果通知后会进行订单状态变更以及执行一些业务逻辑操作，因此需要对SDK做一定修改。通过阅读SDK我们知道后台最终都是通过<code>WxpayApi::replyNotify</code>方法将结果以XML的格式直接输出，方便微信服务器接收，修改<code>WxpayApi::replyNotify</code>，将XML作为结果返回：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 直接输出xml</span><br><span class="line"> * <span class="doctag">@param</span> string $xml</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">replyNotify</span><span class="params">(<span class="variable">$xml</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="comment">//echo $xml;</span></span><br><span class="line">  <span class="comment">//modify by yuri 2015/6/26</span></span><br><span class="line">  <span class="keyword">return</span> <span class="variable">$xml</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此时<code>WxpayApi::replyNotify</code>修改为：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">    * 微信支付回调函数</span><br><span class="line">    * <span class="doctag">@author</span> yuri 2015/6/26</span><br><span class="line">    */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionWxPayCallBack</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">require_once</span> <span class="string">"WxPay.PayNotifyCallBack.php"</span>;</span><br><span class="line">       <span class="variable">$notify</span> = <span class="keyword">new</span> PayNotifyCallBack();</span><br><span class="line">       <span class="variable">$xml</span> = <span class="variable">$notify</span>-&gt;Handle(<span class="keyword">true</span>);</span><br><span class="line">       <span class="variable">$result</span> = simplexml_load_string(<span class="variable">$xml</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//支付成功</span></span><br><span class="line">       <span class="keyword">if</span>(<span class="variable">$result</span>-&gt;return_code ==  <span class="string">'SUCCESS'</span> &amp;&amp; <span class="variable">$result</span>-&gt;return_msg == <span class="string">'OK'</span>) &#123;</span><br><span class="line">           <span class="variable">$postStr</span> = <span class="variable">$GLOBALS</span>[<span class="string">"HTTP_RAW_POST_DATA"</span>];</span><br><span class="line">           <span class="variable">$postStr</span> = simplexml_load_string(<span class="variable">$postStr</span>);</span><br><span class="line">           <span class="keyword">if</span>(<span class="variable">$postStr</span>) &#123;</span><br><span class="line">               <span class="variable">$out_trade_no</span> = <span class="variable">$postStr</span>-&gt;out_trade_no;         <span class="comment">//订单号</span></span><br><span class="line">               <span class="variable">$transaction_id</span> = <span class="variable">$postStr</span>-&gt;transaction_id;     <span class="comment">//交易id</span></span><br><span class="line">               <span class="comment">//处理更新订单状态等其他业务逻辑</span></span><br><span class="line">               <span class="variable">$this</span>-&gt;orderHandle(<span class="variable">$out_trade_no</span>, <span class="variable">$transaction_id</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">echo</span> <span class="variable">$xml</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>orderHandle</code>方法用于处理商户后台订单逻辑，由于微信异步通知可能会多次发送给商户系统，因此商户后台业务处理逻辑<strong>必须能够正确处理重复的通知</strong>，如果是更新订单状态，在进行处理之前需要先判断订单状态，防止重复更新；如果处理逻辑中涉及到数据表插入等操作，要采用数据锁进行并发控制。例如使用Redis进行并发控制，key设置为用户ID+订单号：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置redis防止并发写入</span></span><br><span class="line">      <span class="variable">$redis_key</span> = USERID_ORDERID.<span class="string">':'</span>.<span class="variable">$userid</span>.<span class="string">':'</span>.<span class="variable">$outtradeno</span>;</span><br><span class="line">      <span class="variable">$set_order</span> = Helper::setRedisCache(<span class="string">'setnx'</span>, <span class="keyword">array</span>(<span class="variable">$redis_key</span>, <span class="number">1</span>), Mod::app()-&gt;params-&gt;redisExpire[<span class="string">'useridOrderid'</span>]);</span><br><span class="line">      <span class="keyword">if</span>(<span class="variable">$set_order</span> &amp;&amp; <span class="variable">$set_order</span>[<span class="number">0</span>]) &#123;</span><br><span class="line">          <span class="comment">//执行更新订单、插入数据表等操作，在处理过程中如果遇到失败，需要及时删除redis，防止后续回调不能正常执行。</span></span><br><span class="line">          <span class="variable">$order</span>-&gt;paystate = <span class="number">1</span>;</span><br><span class="line">          <span class="variable">$nret</span> = <span class="variable">$order</span>-&gt;save();</span><br><span class="line">          <span class="keyword">if</span> (<span class="variable">$nret</span>) &#123;</span><br><span class="line">              <span class="comment">//进行后续处理</span></span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="comment">//保存失败，要及时删除redis防止后续回调操作被阻塞</span></span><br><span class="line">              Helper::delRedisCache(<span class="string">'del'</span>, <span class="keyword">array</span>(<span class="variable">$redis_key</span>));</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>$set_order = Helper::setRedisCache(&#39;setnx&#39;, array($redis_key, 1), Mod::app()-&gt;params-&gt;redisExpire</code>使用setnx命令设置key的值为1，且缓存时间设置为24小时。SETNX，是「SET if Not eXists」的缩写，只有缓存不存在的时候才设置，可以利用它来实现锁的效果，但是使用setnx时有一些陷阱，具体可参考<a href="http://huoding.com/2015/09/14/463" target="_blank" rel="external">谈谈Redis的SETNX</a>这篇博文。<br><code>Helper::setRedisCache</code>是封装的添加/修改Redis缓存的公共方法：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">setRedisCache</span><span class="params">(<span class="variable">$command</span>, array <span class="variable">$params</span>, <span class="variable">$expired</span>)</span> </span>&#123;</span><br><span class="line">        <span class="variable">$ret</span> = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$command</span> &amp;&amp; <span class="variable">$params</span> &amp;&amp; !stristr(<span class="variable">$command</span>, <span class="string">'del'</span>) &amp;&amp; !stristr(<span class="variable">$command</span>, <span class="string">'rem'</span>)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (count(<span class="variable">$params</span>) == <span class="number">1</span>) &#123; </span><br><span class="line">                <span class="variable">$ret</span> = Mod::app()-&gt;redis-&gt;multi(Redis::PIPELINE)-&gt;<span class="variable">$command</span>(<span class="variable">$params</span>[<span class="number">0</span>])-&gt;expire(<span class="variable">$params</span>[<span class="number">0</span>], <span class="variable">$expired</span>)-&gt;exec();</span><br><span class="line">            &#125; <span class="keyword">elseif</span> (count(<span class="variable">$params</span>) == <span class="number">2</span>) &#123; </span><br><span class="line">                <span class="variable">$ret</span> = Mod::app()-&gt;redis-&gt;multi(Redis::PIPELINE)-&gt;<span class="variable">$command</span>(<span class="variable">$params</span>[<span class="number">0</span>], <span class="variable">$params</span>[<span class="number">1</span>])-&gt;expire(<span class="variable">$params</span>[<span class="number">0</span>], <span class="variable">$expired</span>)-&gt;exec();</span><br><span class="line">            &#125; <span class="keyword">elseif</span> (count(<span class="variable">$params</span>) == <span class="number">3</span>) &#123; </span><br><span class="line">                <span class="variable">$ret</span> = Mod::app()-&gt;redis-&gt;multi(Redis::PIPELINE)-&gt;<span class="variable">$command</span>(<span class="variable">$params</span>[<span class="number">0</span>], <span class="variable">$params</span>[<span class="number">1</span>], <span class="variable">$params</span>[<span class="number">2</span>])-&gt;expire(<span class="variable">$params</span>[<span class="number">0</span>], <span class="variable">$expired</span>)-&gt;exec();</span><br><span class="line">            &#125;       </span><br><span class="line">        &#125;       </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$ret</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在实际支付过程中可能会出现这样一种情况：<br>用户通过扫码已经完成了支付，但是商户后台没有及时收到微信服务器发送的回调通知，导致商户后台订单状态无法及时更新，因此用户端看到的状态还是“未支付”，用户可能还会继续进行扫码尝试支付，这时在调用统一下单接口时，微信服务器返回的数据中result_code为FAIL，且提示该订单已经支付，此时商户后台需要主动去查询微信端订单状态并更新商户后台订单支付状态。<br>我在处理这种情况是的逻辑是：<br>1）查询商户后台订单状态，如果为未支付，执行步骤2，否则结束；<br>2）主动调用微信<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_2" target="_blank" rel="external">查询订单</a>接口，获取订单状态及订单信息，如订单状态为已支付，执行步骤3；<br>3）商户后台主动更新订单状态以及相应业务逻辑处理。因为在业务逻辑处理中我们使用了数据锁机制，如果在主动更新订单状态的同时收到了微信回调请求，此时也不会发生重复处理的操作，保证了数据的一致性。</p>
+<ul>
+<li>总结：<br>◆ 模式一需要事先在公共号平台配置支付回调URL，而且整个支付流程中涉及两部分微信回调过程，每个微信回调过程<strong>对于支付结果通知的内容一定要做签名验证，防止数据泄漏导致出现“假通知”，造成资金损失。</strong><br>◆ 微信回调处理逻辑要采用数据锁进行并发控制，防止数据重复写入；</li>
+</ul>
+<h3 id="模式二："><a href="#模式二：" class="headerlink" title="模式二："></a>模式二：</h3><p>模式二要比模式一简单，不需要在公共号平台设置回调URL，直接调用统一下单接口得到code_url用于生成二维码，用户扫描二维码完成支付，同时微信将支付结果异步通知商户后台。</p>
+<ul>
+<li>开发流程：<br>◆ 商户后台根据商品生成商户订单；<br>◆ 商户后台调用微信支付统一下单接口生成预支付交易，并返回二维码链接code_url；<br>◆ 商户后台根据code_url生成二维码；<br>◆ 用户扫描二维码后微信端发起用户端微信支付流程（拉起微信支付，输入密码，完成扣款）；<br>◆ 微信支付系统完成交易后向用户微信客户端发送支付结果通知；<br>◆ 微信支付系统通过发送异步消息，将支付结果发送至商户统一下单时填写的回调地址；<br>◆ 商户确认微信支付结果并更新订单状态，如商户后台未收到微信支付结果通知，可以通过调用查询订单接口主动查询订单支付结果。</li>
+</ul>
+<p>◆ 所需文件<br>lib/* ：PHP-SDK lib文件夹；<br>WxPay.NativePay.php：扫码支付实现类；<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span> <span class="string">"wxPay/WxPay.Api.php"</span>;</span><br><span class="line"><span class="keyword">require_once</span> <span class="string">"WxPay.NativePay.php"</span>;</span><br><span class="line"><span class="variable">$notify</span> = <span class="keyword">new</span> NativePay();</span><br><span class="line"></span><br><span class="line"><span class="variable">$input</span> = <span class="keyword">new</span> WxPayUnifiedOrder();</span><br><span class="line"><span class="variable">$input</span>-&gt;SetBody(<span class="variable">$title</span>);</span><br><span class="line"><span class="variable">$input</span>-&gt;SetAttach(<span class="variable">$attach</span>);</span><br><span class="line"><span class="variable">$input</span>-&gt;SetOut_trade_no(<span class="variable">$orderid</span>);</span><br><span class="line"><span class="variable">$input</span>-&gt;SetTotal_fee(<span class="variable">$total_fee</span>);</span><br><span class="line"><span class="variable">$input</span>-&gt;SetTime_start(date(<span class="string">"YmdHis"</span>));</span><br><span class="line"><span class="variable">$input</span>-&gt;SetTime_expire(date(<span class="string">"YmdHis"</span>, time() + <span class="number">600</span>));</span><br><span class="line"><span class="variable">$input</span>-&gt;SetNotify_url(<span class="string">"http://XXX.com/test/WxPayCallBack"</span>);</span><br><span class="line"><span class="variable">$input</span>-&gt;SetTrade_type(<span class="string">"NATIVE"</span>);</span><br><span class="line"><span class="variable">$input</span>-&gt;SetProduct_id(<span class="variable">$orderid</span>);</span><br><span class="line"><span class="variable">$url</span> =  <span class="variable">$notify</span>-&gt;GetPayUrl(<span class="variable">$input</span>);</span><br></pre></td></tr></table></figure></p>
+<p><code>GetPayUrl</code>方法完成了统一下单操作，并返回微信端接口调用结果。<br>注意：生成的code_url有效期为2小时。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">   * </span><br><span class="line">   * 生成直接支付url，支付url有效期为2小时,模式二</span><br><span class="line">   * <span class="doctag">@param</span> UnifiedOrderInput $input</span><br><span class="line">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">GetPayUrl</span><span class="params">(<span class="variable">$input</span>)</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$input</span>-&gt;GetTrade_type() == <span class="string">"NATIVE"</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="variable">$result</span> = WxPayApi::unifiedOrder(<span class="variable">$input</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>模式二支付结果回调流程与模式一相同。</p>
+<hr>
+<h2 id="支付模式区别"><a href="#支付模式区别" class="headerlink" title="支付模式区别"></a>支付模式区别</h2><p>◆ 应用场景：<br>模式一生成的是固定二维码，方便打印，更适用于用户线下扫码支付；<br>模式二是商户后台先下单再生成支付二维码，具有时效性，更适用于线上扫码支付；<br>◆ 开发流程<br>模式一比模式二在支付过程中多一次回调流程，而且模式二流程更为简单；</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>扫码支付在四种支付方式中算是比较简单的一种，而且微信官方SDK已经对支付流程中需要的各种接口作了很好的封装，开发起来相对比较简单。<br>任何一种支付方式都少不了处理异步回调支付结果过程，在该过程中商户后台一定要做好签名验证，正确处理重复通知，保持数据的一致性，防止数据重入造成的数据混乱。</p>
+<p>有关扫码支付的实现已介绍完毕，在下一节<a href="http://yurixu.com/blog/2016/07/22/%E6%BC%AB%E8%B0%88%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-APP%E6%94%AF%E4%BB%98/">漫谈微信支付-APP支付</a>将会介绍APP支付的实现过程。<br>转载请注明出处：<a href="http://yurixu.com/blog/2016/07/15/%E6%BC%AB%E8%B0%88%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-%E6%89%AB%E7%A0%81%E6%94%AF%E4%BB%98/">http://yurixu.com/blog/2016/07/15/漫谈微信支付-扫码支付/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!-- modify by yurixu 2016/1/1 replace Share -->
+      <a data-url="http://yurixu.com/blog/2016/07/15/漫谈微信支付-扫码支付/" data-id="cjhh1wwf9001vvsrd2c2shmvi" class="article-share-link bdsharebuttonbox" data-cmd="more">分享</a>
+      <script>
+      window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+      </script>
+      <!-- add by yurixu 2016/1/6 修改评论定位 -->
+      
+        <a href="/blog/2016/07/15/漫谈微信支付-扫码支付/#comments" class="article-comment-link">留言</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/支付/">支付</a></li></ul>
+
+      <!--添加单篇文章阅读量统计-->
+      <span id="busuanzi_container_page_pv">
+        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+      </span>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2016/07/22/漫谈微信支付-APP支付/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          漫谈微信支付-APP支付
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2016/06/28/漫谈微信支付/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">漫谈微信支付</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+      <div class="ds-thread" data-thread-key="post-漫谈微信支付-扫码支付" data-title="漫谈微信支付-扫码支付" data-url="http://yurixu.com/blog/2016/07/15/漫谈微信支付-扫码支付/"></div>
+      <!-- 多说评论框 end -->
+      <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:'yurixu'};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0] 
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+  <!-- 向百度自动推送-->
+  <script>
+  (function(){
+      var bp = document.createElement('script');
+      bp.src = '//push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script></section>
+        
+      </div>
+      <footer id="footer">
+  
+    <aside id="sidebar" class="outer">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP-网络技术/">PHP 网络技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Read/">Read</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/">Excel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/">FFmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP-POST/">PHP POST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/">Sublime</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/issue/">issue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储过程/">存储过程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/支付/">支付</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阅读/">阅读</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHP-POST/" style="font-size: 10px;">PHP POST</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Read/" style="font-size: 16.67px;">Read</a> <a href="/tags/Sublime/" style="font-size: 11.67px;">Sublime</a> <a href="/tags/issue/" style="font-size: 10px;">issue</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/存储过程/" style="font-size: 10px;">存储过程</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/支付/" style="font-size: 18.33px;">支付</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a> <a href="/tags/阅读/" style="font-size: 11.67px;">阅读</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2016/11/10/统计数据表各列非空值的数量/">统计数据表各列非空值的数量</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/09/06/Postman-接口调试工具使用简介/">Postman接口调试工具使用简介</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/09/02/FFmpeg音视频转换/">FFmpeg音视频转换</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/08/30/Sublime-Text-3-编译运行PHP/">Sublime Text 3 编译运行PHP</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/08/24/几种模拟POST请求的方式汇总/">几种模拟POST请求的方式汇总</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+    
+  <!-- add by yurixu 2016/1/3 add bottom -->
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+	  <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">          
+            Copyright &copy; 2018 Yurixu &nbsp; &nbsp;
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+	        <span id="busuanzi_container_site_uv">Total visit <span id="busuanzi_value_site_uv"></span> times</span> &nbsp; &nbsp; &nbsp; &nbsp;
+	        <span id="busuanzi_container_site_pv">Total views <span id="busuanzi_value_site_pv"></span> times</span> 
+		  </td>
+		  <td style="text-align:right">
+		    <div style="font-family: FontAwesome;font-size: 20px;">
+		    <a href="http://weibo.com/xywEliot" title="微博" target="_blank">&#61834;</a>&nbsp;		
+			<a href="http://user.qzone.qq.com/864909480" title="QQ空间" target="_blank">&#61910;</a>&nbsp;
+		    <a href="https://github.com/xuyuri" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+		    <a href="http://www.linkedin.com/in/yurixu" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;			    	
+			</div><br>
+		    <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;			
+			<a href="mailto:xywbupt@126.com" target="_blank">联系博主</a>&nbsp; &nbsp;	
+			<a href="http://tongji.baidu.com/web/18697832">站长统计</a>			
+		  </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+<!-- add by yurixu 2016/1/1 add website counter -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories/Read/" class="mobile-nav-link">Reading</a>
+  
+    <a href="https://github.com/xuyuri" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/atom.xml" class="mobile-nav-link">RSS</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+< !-- add by yurixu 替换Google的jquery并且添加判断逻辑 -->
+<script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+<!-- add by yurixu 2016/1/8 添加swiftype搜索代码 -->
+<!-- 
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','Fa9mKyRrtZcNX19oWoxv','2.0.0');
+</script>
+-->
+
+  </div>
+</body>
+</html>

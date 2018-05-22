@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+    
+    
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/11/10/%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE%E8%A1%A8%E5%90%84%E5%88%97%E9%9D%9E%E7%A9%BA%E5%80%BC%E7%9A%84%E6%95%B0%E9%87%8F/</loc>
+    <lastmod>2018-05-22T02:15:12.181Z</lastmod>
+    <data>
+        <display>
+        <title>统计数据表各列非空值的数量</title>
+        <pubTime>2016-11-10T09:42:18.000Z</pubTime>
+        
+        <tag>Mysql</tag>
+         
+        <tag>存储过程</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库" url="http://yurixu.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/09/06/Postman-%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2018-05-22T02:15:12.180Z</lastmod>
+    <data>
+        <display>
+        <title>Postman接口调试工具使用简介</title>
+        <pubTime>2016-09-06T01:26:05.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>Sublime</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://yurixu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/08/30/Sublime-Text-3-%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8CPHP/</loc>
+    <lastmod>2018-05-22T02:15:12.179Z</lastmod>
+    <data>
+        <display>
+        <title>Sublime Text 3 编译运行PHP</title>
+        <pubTime>2016-08-30T13:30:23.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>Sublime</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://yurixu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/09/02/FFmpeg%E9%9F%B3%E8%A7%86%E9%A2%91%E8%BD%AC%E6%8D%A2/</loc>
+    <lastmod>2018-05-22T02:15:12.179Z</lastmod>
+    <data>
+        <display>
+        <title>FFmpeg音视频转换</title>
+        <pubTime>2016-09-02T12:37:04.000Z</pubTime>
+        
+        <tag>FFmpeg</tag>
+         
+        <tag>PHP</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://yurixu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/08/24/%E5%87%A0%E7%A7%8D%E6%A8%A1%E6%8B%9FPOST%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E5%BC%8F%E6%B1%87%E6%80%BB/</loc>
+    <lastmod>2018-05-22T02:15:12.178Z</lastmod>
+    <data>
+        <display>
+        <title>几种模拟POST请求的方式汇总</title>
+        <pubTime>2016-08-24T13:31:32.000Z</pubTime>
+        
+        <tag>PHP POST</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP 网络技术" url="http://yurixu.com/categories/PHP-%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/08/21/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%E5%AF%BC%E8%88%AA/</loc>
+    <lastmod>2018-05-22T02:15:12.177Z</lastmod>
+    <data>
+        <display>
+        <title>微信支付系列文章导航</title>
+        <pubTime>2016-08-21T08:01:32.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>支付</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://yurixu.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/08/21/%E6%BC%AB%E8%B0%88%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-%E6%8E%88%E6%9D%83%E7%9B%AE%E5%BD%95%E8%AE%BE%E7%BD%AE/</loc>
+    <lastmod>2018-05-22T02:15:12.177Z</lastmod>
+    <data>
+        <display>
+        <title>漫谈微信支付-授权目录设置</title>
+        <pubTime>2016-08-21T08:00:53.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>支付</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://yurixu.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/08/17/file-get-contents-Unable-to-find-the-wrapper-https/</loc>
+    <lastmod>2018-05-22T02:15:12.176Z</lastmod>
+    <data>
+        <display>
+        <title>file_get_contents(): Unable to find the wrapper https</title>
+        <pubTime>2016-08-17T13:38:35.000Z</pubTime>
+        
+        <tag>issue</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://yurixu.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/08/14/2016%E5%B9%B4%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92%EF%BC%88%E4%B8%8B%EF%BC%89/</loc>
+    <lastmod>2018-05-22T02:15:12.175Z</lastmod>
+    <data>
+        <display>
+        <title>2016年读书计划（下）</title>
+        <pubTime>2016-08-14T14:39:38.000Z</pubTime>
+        
+        <tag>Read</tag>
+         
+         
+           
+             
+              <breadCrumb title="Read" url="http://yurixu.com/categories/Read/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/08/16/%E6%BC%AB%E8%B0%88%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-%E5%85%AC%E5%85%B1%E5%8F%B7%E6%94%AF%E4%BB%98/</loc>
+    <lastmod>2018-05-22T02:15:12.175Z</lastmod>
+    <data>
+        <display>
+        <title>漫谈微信支付-公共号支付</title>
+        <pubTime>2016-08-16T13:22:48.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>支付</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://yurixu.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/08/14/2016%E5%B9%B4%E4%B8%8A%E5%8D%8A%E5%B9%B4%E8%AF%BB%E4%B9%A6%E6%83%85%E5%86%B5/</loc>
+    <lastmod>2018-05-22T02:15:12.174Z</lastmod>
+    <data>
+        <display>
+        <title>2016年上半年读书情况</title>
+        <pubTime>2016-08-14T14:43:39.000Z</pubTime>
+        
+        <tag>Read</tag>
+         
+         
+           
+             
+              <breadCrumb title="Read" url="http://yurixu.com/categories/Read/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/07/22/%E6%BC%AB%E8%B0%88%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-APP%E6%94%AF%E4%BB%98/</loc>
+    <lastmod>2018-05-22T02:15:12.173Z</lastmod>
+    <data>
+        <display>
+        <title>漫谈微信支付-APP支付</title>
+        <pubTime>2016-07-21T19:28:29.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>支付</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://yurixu.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/08/09/2016%E5%B9%B4%E4%B8%8A%E5%8D%8A%E5%B9%B4%E5%B0%8F%E7%BB%93/</loc>
+    <lastmod>2018-05-22T02:15:12.173Z</lastmod>
+    <data>
+        <display>
+        <title>2016年上半年小结</title>
+        <pubTime>2016-08-09T00:07:34.000Z</pubTime>
+        
+        <tag>总结</tag>
+         
+         
+           
+             
+              <breadCrumb title="总结" url="http://yurixu.com/categories/%E6%80%BB%E7%BB%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/07/15/%E6%BC%AB%E8%B0%88%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-%E6%89%AB%E7%A0%81%E6%94%AF%E4%BB%98/</loc>
+    <lastmod>2018-05-22T02:15:12.172Z</lastmod>
+    <data>
+        <display>
+        <title>漫谈微信支付-扫码支付</title>
+        <pubTime>2016-07-14T23:56:20.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>支付</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://yurixu.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/06/28/%E6%BC%AB%E8%B0%88%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/</loc>
+    <lastmod>2018-05-22T02:15:12.171Z</lastmod>
+    <data>
+        <display>
+        <title>漫谈微信支付</title>
+        <pubTime>2016-06-28T14:54:15.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>支付</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://yurixu.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/05/10/Windows%E5%BC%80%E5%90%AFcUrl%E6%A8%A1%E5%9D%97%EF%BC%88Call-to-undefined-function-curl-init-%EF%BC%89/</loc>
+    <lastmod>2018-05-22T02:15:12.170Z</lastmod>
+    <data>
+        <display>
+        <title>Windows开启cUrl模块（Call to undefined function curl_init()）</title>
+        <pubTime>2016-05-10T00:00:49.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>网络</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://yurixu.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/04/05/%E3%80%8APHP%E5%92%8CMySQL-Web%E5%BC%80%E5%8F%91%E3%80%8B%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6/</loc>
+    <lastmod>2018-05-22T02:15:12.170Z</lastmod>
+    <data>
+        <display>
+        <title>《PHP和MySQL Web开发》知识框架</title>
+        <pubTime>2016-04-05T14:41:57.000Z</pubTime>
+        
+        <tag>MySQL</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书笔记" url="http://yurixu.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/03/19/%E3%80%8A%E6%B2%9F%E9%80%9A%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2018-05-22T02:15:12.169Z</lastmod>
+    <data>
+        <display>
+        <title>《沟通的艺术》读书笔记</title>
+        <pubTime>2016-03-19T01:15:18.000Z</pubTime>
+        
+        <tag>阅读</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书笔记" url="http://yurixu.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/02/29/2016%E5%B9%B4%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92%EF%BC%88%E4%B8%8A%EF%BC%89/</loc>
+    <lastmod>2018-05-22T02:15:12.169Z</lastmod>
+    <data>
+        <display>
+        <title>2016年读书计划（上）</title>
+        <pubTime>2016-02-29T04:20:29.000Z</pubTime>
+        
+        <tag>Read</tag>
+         
+         
+           
+             
+              <breadCrumb title="Read" url="http://yurixu.com/categories/Read/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/02/23/%E3%80%8A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E7%9A%84%E8%AF%BB%E6%87%82%E4%B8%80%E6%9C%AC%E4%B9%A6%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2018-05-22T02:15:12.168Z</lastmod>
+    <data>
+        <display>
+        <title>《如何高效的读懂一本书》读书笔记</title>
+        <pubTime>2016-02-23T00:54:44.000Z</pubTime>
+        
+        <tag>阅读</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书笔记" url="http://yurixu.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/02/16/2015%E5%B9%B4%E8%AF%BB%E4%B9%A6%E6%B8%85%E5%8D%95/</loc>
+    <lastmod>2018-05-22T02:15:12.167Z</lastmod>
+    <data>
+        <display>
+        <title>2015年读书清单</title>
+        <pubTime>2016-02-16T13:39:48.000Z</pubTime>
+        
+        <tag>Read</tag>
+         
+         
+           
+             
+              <breadCrumb title="Read" url="http://yurixu.com/categories/Read/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/02/17/2016%E5%B9%B4%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</loc>
+    <lastmod>2018-05-22T02:15:12.166Z</lastmod>
+    <data>
+        <display>
+        <title>2016年读书计划</title>
+        <pubTime>2016-02-17T14:39:39.000Z</pubTime>
+        
+        <tag>Read</tag>
+         
+         
+           
+             
+              <breadCrumb title="Read" url="http://yurixu.com/categories/Read/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/01/19/Python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2018-05-22T02:15:12.166Z</lastmod>
+    <data>
+        <display>
+        <title>Python文件处理（二）读写Excel文件</title>
+        <pubTime>2016-01-19T01:31:47.000Z</pubTime>
+        
+        <tag>Excel</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yurixu.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/01/15/Python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2018-05-22T02:15:12.165Z</lastmod>
+    <data>
+        <display>
+        <title>Python文件处理（一）读写文件</title>
+        <pubTime>2016-01-15T15:48:19.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>文件</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yurixu.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/01/06/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%9B%9B%EF%BC%89/</loc>
+    <lastmod>2018-05-22T02:15:12.164Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo搭建个人博客（四）</title>
+        <pubTime>2016-01-06T15:30:40.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://yurixu.com/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/01/04/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
+    <lastmod>2018-05-22T02:15:12.163Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo搭建个人博客（二）</title>
+        <pubTime>2016-01-03T16:01:56.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://yurixu.com/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/01/05/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
+    <lastmod>2018-05-22T02:15:12.163Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo搭建个人博客（三）</title>
+        <pubTime>2016-01-05T14:34:36.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://yurixu.com/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/01/03/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <lastmod>2018-05-22T02:15:12.162Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo搭建个人博客（一）</title>
+        <pubTime>2016-01-03T13:37:04.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://yurixu.com/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yurixu.com/blog/2016/01/01/Hello-World/</loc>
+    <lastmod>2018-05-22T02:15:12.161Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2016-01-01T01:36:39.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+</urlset>
