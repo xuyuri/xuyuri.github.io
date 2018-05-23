@@ -3,6 +3,26 @@
 
 
     
+  <url>
+    <loc>http://yurixu.com/blog/2018/05/22/PHP-APCU%E7%AE%80%E8%BF%B0/</loc>
+    <lastmod>2018-05-23T02:57:35.040Z</lastmod>
+    <data>
+        <display>
+        <title>PHP APCu简述</title>
+        <pubTime>2018-05-22T12:09:20.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+         
+           
+             
+              <breadCrumb title="PHP" url="http://yurixu.com/categories/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
     
     
@@ -89,26 +109,6 @@
            
              
               <breadCrumb title="工具" url="http://yurixu.com/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yurixu.com/blog/2016/08/24/%E5%87%A0%E7%A7%8D%E6%A8%A1%E6%8B%9FPOST%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E5%BC%8F%E6%B1%87%E6%80%BB/</loc>
-    <lastmod>2018-05-22T02:15:12.178Z</lastmod>
-    <data>
-        <display>
-        <title>几种模拟POST请求的方式汇总</title>
-        <pubTime>2016-08-24T13:31:32.000Z</pubTime>
-        
-        <tag>PHP POST</tag>
-         
-         
-           
-             
-              <breadCrumb title="PHP 网络技术" url="http://yurixu.com/categories/PHP-%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>

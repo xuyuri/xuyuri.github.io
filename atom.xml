@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yurixu.com/"/>
-  <updated>2018-05-22T02:15:12.181Z</updated>
+  <updated>2018-05-23T02:57:35.040Z</updated>
   <id>http://yurixu.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PHP APCu简述</title>
+    <link href="http://yurixu.com/blog/2018/05/22/PHP-APCU%E7%AE%80%E8%BF%B0/"/>
+    <id>http://yurixu.com/blog/2018/05/22/PHP-APCU简述/</id>
+    <published>2018-05-22T12:09:20.000Z</published>
+    <updated>2018-05-23T02:57:35.040Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://7xrc03.com1.z0.glb.clouddn.com/201805/apcu/APCu.png" alt=""><br>本文对PHP的APCu扩展进行简述，并详细介绍其安装流程以及使用方法。</p><a id="more"></a><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>PHP是一种脚本语言，每次在程序运行前都需要将源程序预编译成中间语言，然后再由解释器执行，因此这种解释性语言的程序运行效率通常比编译型语言（例如：C、C++）要低，而如果程序代码没有变更，每次执行前的编译过程就会浪费一定的时间和资源，因此APC应运而生。</p><h3 id="APC"><a href="#APC" class="headerlink" title="APC"></a>APC</h3><p>APC（Alternative PHP Cache）是一种对PHP有效的高速缓冲储存器工具，可用于缓存和优化Web服务器上的PHP代码，改善服务器性能。<br>APC缓存包括：系统缓存和用户数据缓存；</p><p><strong>系统缓存：</strong> APC把PHP文件源码的编译结果进行缓存，每次调用时先对比时间标记，若缓存未过期，则直接使用缓存的中间代码运行（默认缓存1小时），但是这样仍会浪费大量的CPU时间，因此可以在php.ini配置文件中设置系统缓存用不过期（apc.ttl = 0），但是这样设置会导致每次修改代码后都需要重启WEB服务；</p><p><strong>用户数据缓存：</strong> 指用户在程序中主动使用apc_store写入和apc_fetch读取的缓存数据，建议在缓存数据量少时使用，在数据量大的情况下建议使用Redis或MemCache代替。<br>由于PHP5.3.*之后的版本自带php_opcache，因此不再需要apc的系统缓存功能，而且apc的3.1.14版本在PHP5.5版本上有严重的内存问题，被官方废弃。目前最新可用的apc版本为3.1.13，仅支持php 5.3.*</p><h3 id="APCu"><a href="#APCu" class="headerlink" title="APCu"></a>APCu</h3><p>APCu是APC的前身，它起到了缓存用户数据的作用。</p><hr><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="https://pecl.php.net/package/APCu" target="_blank" rel="external">APCu</a><br>由于我的PHP版本为5.6因此，我下载的是4.0.11</p><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>下载4.0.11版本的dll，根据实际情况选择TS版还是NTS版本，将压缩包中的php_apcu.dll文件放置到PHP扩展目录ext下，并在php.ini文件尾部添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[APCu]&#10;extension=php_apcu.dll&#10;apc.enabled=1&#10;apc.shm_size=32M&#10;apc.ttl=7200&#10;apc.enable_cli=1&#10;apc.serializer=php</span><br></pre></td></tr></table></figure></p><p>重启Web服务，输出phpinfo信息，检测是否包含apcu的配置信息。</p><h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><p>下载4.0.11版本的tgz压缩包，解压缩后在代码目录中依次执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/phpize5.6&#10;./configure --with-php-config=/usr/bin/php-config5.6&#10;make&#10;make install</span><br></pre></td></tr></table></figure></p><p>注意：phpize和php-config根据实际情况设置<br>安装完成后在php.ini文件尾部添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[apc]&#10;extension = apcu.so&#10;apc.enabled= on&#10;apc.shm_size= 64M&#10;apc.enable_cli = on</span><br></pre></td></tr></table></figure></p><p>重启Web服务，输出phpinfo信息，检测是否包含apcu的配置信息。</p><hr><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="控制台"><a href="#控制台" class="headerlink" title="控制台"></a>控制台</h3><p>下载<a href="https://github.com/xuyuri/apcu/blob/master/apc.php" target="_blank" rel="external">apc.php</a>文件，修改用户名和密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults(&#39;ADMIN_USERNAME&#39;,&#39;myname&#39;);             &#10;defaults(&#39;ADMIN_PASSWORD&#39;,&#39;mypassword&#39;);</span><br></pre></td></tr></table></figure></p><p>将apc.php文件置于WEB根目录下即可查看缓存详情：</p><p><img src="http://7xrc03.com1.z0.glb.clouddn.com/201805/apcu/APCu-detail.png" alt=""></p><h3 id="使用APCu"><a href="#使用APCu" class="headerlink" title="使用APCu"></a>使用APCu</h3><p><strong>函数列表：</strong></p><ul><li>apcu_add — Cache a new variable in the data store</li><li>apcu_cache_info — Retrieves cached information from APCu’s data store</li><li>apcu_cas — Updates an old value with a new value</li><li>apcu_clear_cache — Clears the APCu cache</li><li>apcu_dec — Decrease a stored number</li><li>apcu_delete — Removes a stored variable from the cache</li><li>apcu_entry — Atomically fetch or generate a cache entry</li><li>apcu_exists — Checks if entry exists</li><li>apcu_fetch — Fetch a stored variable from the cache</li><li>apcu_inc — Increase a stored number</li><li>apcu_sma_info — Retrieves APCu Shared Memory Allocation information</li><li>apcu_store — Cache a variable in the data store</li></ul><p><strong>示例：</strong><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取缓存内容</span></span><br><span class="line"><span class="variable">$result</span> = apc_fetch(<span class="variable">$key</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$result</span>)) &#123;</span><br><span class="line">    <span class="variable">$result</span> = Test::model()-&gt;getList();</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$result</span>) ) &#123;</span><br><span class="line">        <span class="comment">//添加缓存内容</span></span><br><span class="line">        apc_add(<span class="variable">$key</span>, <span class="variable">$result</span>, <span class="number">120</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>转载请注明出处：<a href="http://yurixu.com/blog/2018/05/22/PHP-APCU%E7%AE%80%E8%BF%B0/">http://yurixu.com/blog/2018/05/22/PHP-APCU简述/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      PHP APCu简述
+    
+    </summary>
+    
+      <category term="PHP" scheme="http://yurixu.com/categories/PHP/"/>
+    
+    
+      <category term="PHP" scheme="http://yurixu.com/tags/PHP/"/>
+    
+  </entry>
   
   <entry>
     <title>统计数据表各列非空值的数量</title>
@@ -109,28 +131,6 @@
       <category term="PHP" scheme="http://yurixu.com/tags/PHP/"/>
     
       <category term="Sublime" scheme="http://yurixu.com/tags/Sublime/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>几种模拟POST请求的方式汇总</title>
-    <link href="http://yurixu.com/blog/2016/08/24/%E5%87%A0%E7%A7%8D%E6%A8%A1%E6%8B%9FPOST%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E5%BC%8F%E6%B1%87%E6%80%BB/"/>
-    <id>http://yurixu.com/blog/2016/08/24/几种模拟POST请求的方式汇总/</id>
-    <published>2016-08-24T13:31:32.000Z</published>
-    <updated>2018-05-22T02:15:12.178Z</updated>
-    
-    <content type="html"><![CDATA[<p>几种模拟POST请求的方式汇总<br><a id="more"></a></p><p>//方式一：file_get_contents<br>/*<br> $url = ‘<a href="https://bbs.byr.cn/user/ajax_login.json&#39;" target="_blank" rel="external">https://bbs.byr.cn/user/ajax_login.json&#39;</a>;</p><p> $data = array(‘id’ =&gt; ‘xyw043735’, ‘passwd’ =&gt; ‘xyw08371’);<br> $data = http_build_query($data);<br> $opts = array(<br>    ‘http’ =&gt; array(<br>        ‘method’ =&gt; ‘POST’,<br>        ‘header’ =&gt; “content-type: application/x-www-form-urlencoded; charset=UTF-8\r\n”.<br>        “user-agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36\r\n”.<br>        “x-requested-with: XMLHttpRequest\r\n”,<br>        ‘content’ =&gt; $data<br>    ),<br> );<br> $context = stream_context_create($opts);<br> $html = @file_get_contents($url, false, $context);<br> print_r($html);<br> echo “—-start second —-\n”;<br> die;<br> **/</p><p> //方式二：socket<br> /*<br>$file = ‘out.txt’;<br>$host = ‘bbs.byr.cn’;<br>$port = 443;<br>$proxy = ‘ssl://‘;<br>//对于HTTP协议，port对应80，proxy为http://，对于HTTPS协议，port对应443，协议为ssl://<br>//$fp = fsockopen($proxy.$host, $port, $errno, $errstr, 5);<br>$fp = stream_socket_client(“ssl://bbs.byr.cn:443”, $errno, $errstr, 5);<br>//对于HTTP协议，stream_socket_client第一个参数使用tcp://<br>if($fp) {<br>    $out = “POST <a href="https://bbs.byr.cn/user/ajax_login.json" target="_blank" rel="external">https://bbs.byr.cn/user/ajax_login.json</a> HTTP/1.1\r\n”;<br>    $out .= “Host: bbs.byr.cn\r\n”.<br>            “content-type: application/x-www-form-urlencoded; charset=UTF-8\r\n”.<br>            “user-agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36\r\n”.<br>            “x-requested-with: XMLHttpRequest\r\n”.<br>            “Content-Length: 28\r\n”.<br>            “Connection: close\r\n\r\n”;<br>    $out .= $data.”\r\n\r\n”;<br>    //print_r($out);die;<br>    fwrite($fp, $out);</p><pre><code>while(!feof($fp)) {    echo fgets($fp, 1280);}//file_put_contents($file, $fp);        //写入文件fclose($fp);</code></pre><p>}<br>die;</p><ul><li>*/</li></ul><p>//方式三：curl<br> $url = ‘<a href="https://bbs.byr.cn/user/ajax_login.json&#39;" target="_blank" rel="external">https://bbs.byr.cn/user/ajax_login.json&#39;</a>;</p><p> $data = array(‘id’ =&gt; ‘xyw043735’, ‘passwd’ =&gt; ‘xyw08371’);<br> $data = http_build_query($data); </p><p>$ch = curl_init();<br>curl_setopt($ch, CURLOPT_TIMEOUT, 30);<br>curl_setopt($ch, CURLOPT_URL, ‘<a href="https://bbs.byr.cn/user/ajax_login.json&#39;)" target="_blank" rel="external">https://bbs.byr.cn/user/ajax_login.json&#39;)</a>;<br>curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,FALSE);<br>curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,FALSE);<br>curl_setopt($ch, CURLOPT_HEADER, FALSE);<br>curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);<br>curl_setopt($ch, CURLOPT_POST, TRUE);<br>curl_setopt($ch, CURLOPT_POSTFIELDS, $data);<br>$output = curl_exec($ch);<br>var_dump(curl_errno($ch));  //查看报错信息<br> if (curl_errno($ch)) {<br>       echo ‘Errno’.curl_error($ch);//捕抓异常<br>    }<br>curl_close($ch);<br>echo ‘res=’;print_r($output);<br>die;</p>]]></content>
-    
-    <summary type="html">
-    
-      几种模拟POST请求的方式汇总
-    
-    </summary>
-    
-      <category term="PHP 网络技术" scheme="http://yurixu.com/categories/PHP-%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="PHP POST" scheme="http://yurixu.com/tags/PHP-POST/"/>
     
   </entry>
   
