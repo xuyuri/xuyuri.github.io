@@ -38,9 +38,11 @@
       window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
       </script>
       <!-- add by yurixu 2016/1/6 修改评论定位 -->
+      <!-- add by yurixu 2018/5/29 关闭评论
       <% if (post.comments && config.duoshuo_shortname){ %>
         <a href="<%- url_for(post.path) %>#comments" class="article-comment-link">留言</a>
       <% } %>
+      -->
 
       <%- partial('post/tag') %>
       <!--添加单篇文章阅读量统计-->
@@ -54,6 +56,7 @@
   <% } %>
 </article>
 
+<!-- add by yurixu 2018/5/29 关闭评论
 <% if (!index && post.comments && config.duoshuo_shortname){ %>
   <section id="comments">
     <!-- 多说评论框 start -->
@@ -74,6 +77,7 @@
       <!-- 多说公共JS代码 end -->
   </section>
   <% } %>
+-->
 
   <!-- 向百度自动推送-->
   <script>
