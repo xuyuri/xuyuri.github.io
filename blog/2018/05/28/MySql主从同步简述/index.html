@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL主从复制简述 | Yuri&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MySQL主从复制简述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL主从复制简述">
+<meta property="og:url" content="http://yurixu.com/blog/2018/05/28/MySql主从同步简述/index.html">
+<meta property="og:site_name" content="Yuri's Blog">
+<meta property="og:description" content="MySQL主从复制简述">
+<meta property="og:image" content="http://7xrc03.com1.z0.glb.clouddn.com/201611/Mysql/mysql.jpg">
+<meta property="og:image" content="http://7xrc03.com1.z0.glb.clouddn.com/201805/mysql/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%B1%BB%E5%9E%8B.png">
+<meta property="og:image" content="http://7xrc03.com1.z0.glb.clouddn.com/201805/mysql/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B.png">
+<meta property="og:updated_time" content="2018-05-29T13:42:18.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL主从复制简述">
+<meta name="twitter:description" content="MySQL主从复制简述">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <!--link href="//fonts.useso.com/css?family=Lato:400,400italic" rel="stylesheet" type="text/css"-->
+  <link href="http://yurixu.com/css/fonts/Google/font.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">  
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?3da38d5511434722ab5f79d1cffab2ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  <!--
+
+-->
+  
+
+  <!-- add by yurixu 2016/1/13 向百度提交sitemap-->
+  <meta name="baidu-site-verification" content="ubBCJmBrxD" />
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Yuri&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Walk step by step</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories/Read/">Reading</a>
+        
+          <a class="main-nav-link" href="https://github.com/xuyuri">GitHub</a>
+        
+          <a class="main-nav-link" href="/atom.xml">RSS</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <! --modify by yurixu 22016/1/8 修改search为swiftype -->
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <!-- <input type="text" class="st-default-search-input"> -->
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yurixu.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-MySql主从同步简述" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL主从复制简述
+    </h1>
+  
+
+      </header>
+    
+    <!-- add by yurixu 2016/1/3 将文章时间放在标题下 -->
+    <div class="article-meta">
+      <a href="/blog/2018/05/28/MySql主从同步简述/" class="article-date">
+  <time datetime="2018-05-28T12:47:20.000Z" itemprop="datePublished">2018-5-28 周一  20:47</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+  </div>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- add by yurixu 2016/1/3 添加文章目录 -->
+        
+        <p><img src="http://7xrc03.com1.z0.glb.clouddn.com/201611/Mysql/mysql.jpg" alt=""></p>
+<p>本文对MySQL主从复制的配置以及实现原理进行简述。</p>
+<a id="more"></a>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>MySQL主从复制技术是指将主库中的数据复制到从数据库中，基本实现流程是将主库的操作写入二进制日志文件，将二进制日志文件传递到从库，在从库中重放日志中的操作过程，从而达到对主库的操作（增删改）同步更新至从库的目的。</p>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>MySQL主从复制的方案主要有：主从复制、主主复制、多源复制等多种类型。<br><img src="http://7xrc03.com1.z0.glb.clouddn.com/201805/mysql/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%B1%BB%E5%9E%8B.png" alt=""></p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
+<li>减轻负载<br>读写分离，主库写，从库读，降低主库压力；</li>
+<li>确保安全<br>在从库进行数据备份，不影响主库服务和性能；</li>
+<li>提升性能<br>主库出现异常时，切换到从库提供服务，缩短停机窗口；</li>
+</ul>
+<p><strong>多源复制技术</strong>（Multi-Source Replication）是从MySQL 5.7版本之后支持的复制技术，如上图中的类型⑤所示，即：将多个Master的数据汇聚到一台Slave上，这种复制类型除了上述优点外，还具有<sup>[1]</sup>：</p>
+<ul>
+<li>数据汇集<br>将多台主库的数据汇集到一台从库服务器，尤其对于分库分表的应用场景中，可以在从库中对数据做统一处理；</li>
+<li>成本节约<br>在MySQL 5.7版本之前，对于1主1从或1主多从的复制方式，需要为每台主机配置相应1台备机，多源复制技术出现后，可以将多个从库进行数据合并，用一台备机进行备份；</li>
+<li>集中备份<br>方便在一台服务器上对接收到的所有主库数据进行统一备份；</li>
+<li>异地灾备<br>将从库放在距离远的地方，可用于异地备份；</li>
+</ul>
+<hr>
+<h2 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h2><h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><p><img src="http://7xrc03.com1.z0.glb.clouddn.com/201805/mysql/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<p>MySQL主从复制的基本流程是：<br>Master服务器开启binlog日志功能，当Master数据发生变更时，将变更信息记录到binlog二进制日志文件中；<br>Slave服务器会开启I/O thread线程，连接到Master服务器，Master服务器开启Binlog Dump线程，检测Master服务器的二进制文件变化，若有新的变更记录产生，Binlog Dump线程将读取的二进制内容发送至Slave服务器，Slave服务器的I/O thread线程读取Binlog Dump线程发送过来的内容，并将其写入Slave服务器的中继日志文件relaylog中；<br>Slave服务器中的SQL thread线程会检测relaylog的变化，将Master上的变更事件在Slave服务器中进行重放操作，从而使Master服务器上的数据与Slave服务器一致。</p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>主从同步前主从服务器做好时间同步校对；</li>
+<li>Master要开启binlog二进制日志功能，通常为了数据安全性考虑，Slave服务器最好也同时开启；</li>
+<li>主从服务器的MySQL版本最好相同（若不相同，要保证Master 的版本低于Slave的版本）</li>
+<li>主服务器要创建账号且拥有SLAVE权限</li>
+<li>复制过程需要3个线程参与，其中Master服务器1个（Binlog Dump），Slave服务器2个（I/O thread、SQL thread）</li>
+<li>同步前主从库中的数据要保持一致（可以在同步前将主库的数据导入从库）</li>
+</ul>
+<h3 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h3><p>假定Master和Slave服务器的IP分别为：<br>Master：192.168.1.100<br>Slave：192.168.1.101</p>
+<p><strong>Master服务器：</strong></p>
+<ul>
+<li><p>创建用户</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">GRANT</span> <span class="keyword">REPLICATION</span> <span class="keyword">SLAVE</span>  <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'slave'</span>@<span class="string">'192.168.1.101'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'password'</span> ;</span></span><br><span class="line"><span class="operator"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span></span><br></pre></td></tr></table></figure>
+<p>  创建账号slave，添加SLAVE的权限，且只能从192.168.1.101登录，密码为password；如果要撤销同步账号的权限，执行：</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">REVOKE</span> <span class="keyword">REPLICATION</span> <span class="keyword">SLAVE</span> <span class="keyword">ON</span> *.* <span class="keyword">FROM</span> <span class="string">'slave'</span>@<span class="string">'192.168.1.101'</span>;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改MySQL配置<br>在[mysqld]配置项下添加：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log-bin           = mysql-bin   <span class="comment">#[必须]启用二进制日志</span></span><br><span class="line">server-id         = <span class="number">1</span>           <span class="comment">#[必须]服务器唯一ID，默认是1</span></span><br><span class="line">expire-logs-days  = <span class="number">3</span>           <span class="comment">#只保留3天的二进制日志，以防磁盘被日志占满</span></span><br></pre></td></tr></table></figure>
+<p>  重启MySQL服务</p>
+</li>
+<li><p>查看主库状态<br>在主库执行<code>show master status;</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show master status;</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line">| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line">| mysql-bin<span class="number">.000001</span> |  <span class="number">128</span> |              |                  |                   |</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line"><span class="number">1</span> row in set (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>  记录File和Position的值，在后续配置从库时会用到。</p>
+</li>
+</ul>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li><p>在主从同步前，需要保证主库和从库的数据一致，可以将主库数据导入到从库，在导出主库数据之前，先锁定主库：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">flush</span> <span class="keyword">tables</span> <span class="keyword">with</span> <span class="keyword">read</span> <span class="keyword">lock</span>;</span>    #数据库只读锁定命令，防止导出数据库的时候有数据写入。<span class="operator"><span class="keyword">unlock</span> <span class="keyword">tables</span>命令解除锁定</span></span><br></pre></td></tr></table></figure>
+<p>  导出数据库命令：</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u用户名 -p密码 数据库名 &gt; 数据库名.sql</span><br></pre></td></tr></table></figure>
+<p>  导入数据库命令：</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 首先创建数据库</span><br><span class="line">CREATE DATABASE `数据库名`;</span><br><span class="line"># 导入数据</span><br><span class="line">mysql -u用户名 -p密码 数据库名 &lt; 数据库名.sql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建议不要在主库配置要同步的数据库和要忽略的数据库，只在从库上做限制，具体原因可参考：<a href="http://coolnull.com/3145.html" target="_blank" rel="external">《为什么mysql的binlog-do-db选项是危险的》</a>，同时关于binlog-do-db、 binlog-ignore-db、replicate-do-db、replicate-ignore-db的配置说明可参考：<a href="http://www.ywnds.com/?p=6945" target="_blank" rel="external">《MySQL主从复制过滤规则应用》</a></p>
+</li>
+</ul>
+<p><strong>Slave服务器：</strong></p>
+<ul>
+<li><p>修改MySQL配置<br>在[mysqld]配置项下添加：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">log-bin               = mysql-bin           <span class="comment">#[建议]启用二进制日志</span></span><br><span class="line">server-id             = <span class="number">2</span>                   <span class="comment">#[必须]服务器唯一ID，不能与主库相同</span></span><br><span class="line">replicate-ignore-db   = mysql               <span class="comment">#[建议]不进行备份的数据库</span></span><br><span class="line">replicate-ignore-db   = information_schema  <span class="comment">#[建议]不进行备份的数据库</span></span><br><span class="line">replicate-ignore-db   = performation_schema <span class="comment">#[建议]不进行备份的数据库</span></span><br><span class="line">replicate-ignore-db   = sys                 <span class="comment">#[建议]不进行备份的数据库</span></span><br><span class="line"></span><br><span class="line">slave-skip-errors     = all                 <span class="comment">#跳过复制过程中的所有错误</span></span><br><span class="line">slave-net-timeout     = <span class="number">60</span>                  <span class="comment">#一定时间后从库没有收到主库发送的binlog会主动重连</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置主从通信<br>在从库执行：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CHANGE</span> <span class="keyword">MASTER</span> <span class="keyword">TO</span> MASTER_HOST=<span class="string">'192.168.1.100'</span>, MASTER_USER=<span class="string">'slave'</span>, MASTER_PASSWORD=<span class="string">'password'</span>, MASTER_LOG_FILE=<span class="string">'mysql-bin.000001'</span>, MASTER_LOG_POS=<span class="number">128</span>;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开启同步<br>在从库执行：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">start</span> <span class="keyword">slave</span>;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><ul>
+<li><p>线程验证<br>在主库执行：<code>SHOW FULL PROCESSLIST;</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW FULL PROCESSLIST;</span><br><span class="line">+-------+-------+-----------------+------+-------------+------+---------------------------------------------------------------+-----------------------+</span><br><span class="line">| Id    | User  | Host            | db   | Command     | Time | State                                                         | Info                  |</span><br><span class="line">+-------+-------+-----------------+------+-------------+------+---------------------------------------------------------------+-----------------------+</span><br><span class="line">| <span class="number">18046</span> | slave | <span class="number">192.168</span><span class="number">.1</span><span class="number">.100</span>:<span class="number">60066</span> | <span class="keyword">NULL</span> | Binlog Dump |   <span class="number">14</span> | Master has sent all binlog to slave; waiting <span class="keyword">for</span> more updates | <span class="keyword">NULL</span>                  |</span><br><span class="line">| <span class="number">18047</span> | root  | localhost       | <span class="keyword">NULL</span> | Query       |    <span class="number">0</span> | starting                                                      | SHOW FULL PROCESSLIST |</span><br><span class="line">+-------+-------+-----------------+------+-------------+------+---------------------------------------------------------------+-----------------------+</span><br><span class="line"><span class="number">2</span> rows in set (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>  可以看到Id为18046这条记录，用户为slave，状态：<code>Master has sent all binlog to slave; waiting for more updates</code>，表示主库已经开启了Binlog Dump线程；<br>在从库执行：<code>SHOW FULL PROCESSLIST;</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW FULL PROCESSLIST;</span><br><span class="line">+----+-------------+-----------+------+---------+------+--------------------------------------------------------+-----------------------+</span><br><span class="line">| Id | User        | Host      | db   | Command | Time | State                                                  | Info                  |</span><br><span class="line">+----+-------------+-----------+------+---------+------+--------------------------------------------------------+-----------------------+</span><br><span class="line">|  <span class="number">1</span> | system user |           | <span class="keyword">NULL</span> | Connect |  <span class="number">853</span> | Slave has read all relay log; waiting <span class="keyword">for</span> more updates | <span class="keyword">NULL</span>                  |</span><br><span class="line">|  <span class="number">2</span> | system user |           | <span class="keyword">NULL</span> | Connect | <span class="number">2270</span> | Waiting <span class="keyword">for</span> master to send event                       | <span class="keyword">NULL</span>                  |</span><br><span class="line">|  <span class="number">7</span> | root        | localhost | <span class="keyword">NULL</span> | Query   |    <span class="number">0</span> | starting                                               | SHOW FULL PROCESSLIST |</span><br><span class="line">+----+-------------+-----------+------+---------+------+--------------------------------------------------------+-----------------------+</span><br><span class="line"><span class="number">3</span> rows in set (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>  可以看到从库开启了2个用户为system user的线程，其中状态为<code>Slave has read all relay log; waiting for more updates</code>的线程为SQL thread，状态为<code>Waiting for master to send event</code>的线程为I/O thread；</p>
+</li>
+<li><p>状态验证<br>在从库执行：<code>SHOW SLAVE STATUS \G</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW SLAVE STATUS \G</span><br><span class="line">*************************** <span class="number">1.</span> row ***************************</span><br><span class="line">               Slave_IO_State: Waiting <span class="keyword">for</span> master to send event</span><br><span class="line">                  Master_Host: <span class="number">192.168</span><span class="number">.1</span><span class="number">.100</span></span><br><span class="line">                  Master_User: slave</span><br><span class="line">                  Master_Port: <span class="number">3306</span></span><br><span class="line">                Connect_Retry: <span class="number">60</span></span><br><span class="line">              Master_Log_File: mysql-bin<span class="number">.000003</span></span><br><span class="line">          Read_Master_Log_Pos: <span class="number">4151663</span></span><br><span class="line">               Relay_Log_File: yurixu-relay-bin<span class="number">.000007</span></span><br><span class="line">                Relay_Log_Pos: <span class="number">322375</span></span><br><span class="line">        Relay_Master_Log_File: mysql-bin<span class="number">.000003</span></span><br><span class="line">             Slave_IO_Running: Yes</span><br><span class="line">            Slave_SQL_Running: Yes</span><br><span class="line">              Replicate_Do_DB:</span><br><span class="line">          Replicate_Ignore_DB: mysql,information_schema,performation_schema,sys</span><br><span class="line">           Replicate_Do_Table:</span><br><span class="line">       Replicate_Ignore_Table:</span><br><span class="line">      Replicate_Wild_Do_Table:</span><br><span class="line">  Replicate_Wild_Ignore_Table:</span><br><span class="line">                   Last_Errno: <span class="number">0</span></span><br><span class="line">                   Last_Error:</span><br><span class="line">                 Skip_Counter: <span class="number">0</span></span><br><span class="line">          Exec_Master_Log_Pos: <span class="number">4151663</span></span><br><span class="line">              Relay_Log_Space: <span class="number">322583</span></span><br><span class="line">              Until_Condition: None</span><br><span class="line">               Until_Log_File:</span><br><span class="line">                Until_Log_Pos: <span class="number">0</span></span><br><span class="line">           Master_SSL_Allowed: No</span><br><span class="line">           Master_SSL_CA_File:</span><br><span class="line">           Master_SSL_CA_Path:</span><br><span class="line">              Master_SSL_Cert:</span><br><span class="line">            Master_SSL_Cipher:</span><br><span class="line">               Master_SSL_Key:</span><br><span class="line">        Seconds_Behind_Master: <span class="number">0</span></span><br><span class="line">Master_SSL_Verify_Server_Cert: No</span><br><span class="line">                Last_IO_Errno: <span class="number">0</span></span><br><span class="line">                Last_IO_Error:</span><br><span class="line">               Last_SQL_Errno: <span class="number">0</span></span><br><span class="line">               Last_SQL_Error:</span><br><span class="line">  Replicate_Ignore_Server_Ids:</span><br><span class="line">             Master_Server_Id: <span class="number">1</span></span><br><span class="line">                  Master_UUID: e1767343-c887-<span class="number">11e7</span>-<span class="number">9562</span>-<span class="number">560001432728</span></span><br><span class="line">             Master_Info_File: /<span class="keyword">var</span>/lib/mysql/master.info</span><br><span class="line">                    SQL_Delay: <span class="number">0</span></span><br><span class="line">          SQL_Remaining_Delay: <span class="keyword">NULL</span></span><br><span class="line">      Slave_SQL_Running_State: Slave has read all relay log; waiting <span class="keyword">for</span> more updates</span><br><span class="line">           Master_Retry_Count: <span class="number">86400</span></span><br><span class="line">                  Master_Bind:</span><br><span class="line">      Last_IO_Error_Timestamp:</span><br><span class="line">     Last_SQL_Error_Timestamp:</span><br><span class="line">               Master_SSL_Crl:</span><br><span class="line">           Master_SSL_Crlpath:</span><br><span class="line">           Retrieved_Gtid_Set:</span><br><span class="line">            Executed_Gtid_Set:</span><br><span class="line">                Auto_Position: <span class="number">0</span></span><br><span class="line">         Replicate_Rewrite_DB:</span><br><span class="line">                 Channel_Name:</span><br><span class="line">           Master_TLS_Version:</span><br><span class="line"><span class="number">1</span> row in set (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>  <strong>Slave_IO_State:</strong> Waiting for master to send event： #当前从库的状态<br><strong>Slave_IO_Running：</strong> Yes                             #I/O线程是否运行<br><strong>Slave_SQL_Running：</strong> Yes                            #SQL线程是否运行<br><strong>Seconds_Behind_Master:</strong> 0                           #0表示主从库已同步</p>
+<p>  Slave_IO_Running和Slave_SQL_Running必须均为YES，否则可以从以下几个方面排查 <sup>[2]</sup>：</p>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> Master服务器和Slave是否可以ping通；</span><br><span class="line"><span class="number">2.</span> 配置主从通信时，用户名、密码、MASTER_LOG_POS等项是否正确；</span><br><span class="line"><span class="number">3.</span> MySQL的server-uuid是否相同；（如果是复制的MySQL，server-uuid是相同的）</span><br><span class="line">$ find / -name <span class="string">'auto.cnf'</span></span><br><span class="line">$ cat /<span class="keyword">var</span>/lib/mysql/auto.cnf</span><br><span class="line">[auto]</span><br><span class="line">server-uuid=<span class="number">6</span>b831bf3-<span class="number">8</span>ae7-<span class="number">11e7</span>-a178-<span class="number">000</span>c29cb5cbc <span class="comment"># 按照这个16进制格式，修改server-uuid，重启mysql即可</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>同步验证<br>在主库添加数据，登录从库，查看是否会同步过来。</li>
+</ul>
+<hr>
+<h2 id="主主复制"><a href="#主主复制" class="headerlink" title="主主复制"></a>主主复制</h2><p>主主复制的实现过程与主从复制类似，主从复制一般只在主库执行写操作，在从库执行读操作；主主复制对应的两台服务器均可执行写操作，因此需要保证向数据库里插入数据的自增长ID不能相同，可以通过在两台服务器上添加参数，实现自增长ID互为奇数和偶数。<br>auto-increment-increment：自增起始值；<br>auto_increment_offset：自增偏移量；<br>因此主主复制时，两台服务器的auto_increment_offset均设置为2，auto-increment-increment分别设置为1和2。</p>
+<h3 id="配置流程-1"><a href="#配置流程-1" class="headerlink" title="配置流程"></a>配置流程</h3><p><strong>Master1服务器：</strong></p>
+<ul>
+<li><p>创建用户<br>参考主从复制流程</p>
+</li>
+<li><p>修改MySQL配置<br>参考主从复制流程，且两台服务器均需要开启binlog日志，同时需要在[mysqld]配置项中增加：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto-increment-increment = 1    </span><br><span class="line">auto-increment-offset = 2</span><br></pre></td></tr></table></figure>
+<p>  重启MySQL服务</p>
+</li>
+<li><p>查看Master1状态<br>参考主从同步流程，记录File和Position的值。</p>
+</li>
+</ul>
+<p><strong>Master2服务器：</strong></p>
+<ul>
+<li><p>创建用户<br>参考主从复制流程</p>
+</li>
+<li><p>修改MySQL配置<br>参考主从复制流程，且两台服务器均需要开启binlog日志，同时需要在[mysqld]配置项中增加：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto-increment-increment = 2    </span><br><span class="line">auto-increment-offset = 2</span><br></pre></td></tr></table></figure>
+<p>  重启MySQL服务</p>
+</li>
+<li><p>查看Master2状态<br>参考主从同步流程，记录File和Position的值。</p>
+</li>
+<li><p>配置通信<br>先在Master2数据库上做同步master的设置：（确保Master2上要同步的数据，提前在Master1上存在，最好双方数据保持一致）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CHANGE</span> <span class="keyword">MASTER</span> <span class="keyword">TO</span> MASTER_HOST...</span><br><span class="line"><span class="keyword">START</span> <span class="keyword">SLAVE</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span> \<span class="keyword">G</span></span></span><br></pre></td></tr></table></figure>
+<p>  这样就实现了Master2-&gt;Master1的同步；<br>再在Master1上做同步master的设置：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CHANGE</span> <span class="keyword">MASTER</span> <span class="keyword">TO</span> MASTER_HOST...</span><br><span class="line"><span class="keyword">START</span> <span class="keyword">SLAVE</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span> \<span class="keyword">G</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="验证-1"><a href="#验证-1" class="headerlink" title="验证"></a>验证</h3><p>参考主从复制流程</p>
+<hr>
+<h2 id="多源复制"><a href="#多源复制" class="headerlink" title="多源复制"></a>多源复制</h2><p>多源复制是将多个Master的数据同步至1台Slave中，配置流程与主从复制相似。<br>假定目前需要将Master1和Master2的数据同步至Slave中。<br>Master1：192.168.1.100<br>Master2：192.168.1.101<br>Slave：192.168.1.102</p>
+<h3 id="配置流程-2"><a href="#配置流程-2" class="headerlink" title="配置流程"></a>配置流程</h3><p><strong>Master1服务器：</strong></p>
+<ul>
+<li>创建用户<br>参考主从复制流程</li>
+<li>修改MySQL配置<br>参考主从复制流程</li>
+<li>查看Master1状态<br>参考主从同步流程，记录File和Position的值。</li>
+</ul>
+<p><strong>Master2服务器：</strong></p>
+<ul>
+<li>创建用户<br>参考主从复制流程</li>
+<li>修改MySQL配置<br>参考主从复制流程</li>
+<li>查看Master1状态<br>参考主从同步流程，记录File和Position的值。</li>
+</ul>
+<p><strong>数据导出：</strong><br>分别将Master1和Master2中的数据库导出，并上传至Slave服务器；</p>
+<p><strong>数据导入：</strong><br>在Slave上导入Master数据之前，需要先修改master_info_repository和relay_log_info_repository：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">master_info_repository=TABLE</span><br><span class="line">relay_log_info_repository=TABLE</span><br></pre></td></tr></table></figure></p>
+<p>也可以在MySQL中通过命令行修改：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> master_info_repository = <span class="string">'TABLE'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> relay_log_info_repository = <span class="string">'TABLE'</span>;</span></span><br></pre></td></tr></table></figure></p>
+<p>具体原因可参官方说明：<a href="https://dev.mysql.com/doc/refman/5.7/en/slave-logs.html" target="_blank" rel="external">16.2.4 Replication Relay and Status Logs</a></p>
+<p><strong>配置通信</strong><br>此处与主从复制流程中的配置通信稍有不同，在Slave中分别CHANGE MASTER到两台Master服务器，结尾以FOR CHANNEL ‘CHANNEL_NAME’区分：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CHANGE</span> <span class="keyword">MASTER</span> <span class="keyword">TO</span> MASTER_HOST=<span class="string">'192.168.1.100'</span>, MASTER_USER=<span class="string">'slave'</span>, MASTER_PASSWORD=<span class="string">'password'</span>, MASTER_LOG_FILE=<span class="string">'mysql-bin.000001'</span>, MASTER_LOG_POS=<span class="number">128</span> <span class="keyword">FOR</span> CHANNEL <span class="string">'Master_1'</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CHANGE</span> <span class="keyword">MASTER</span> <span class="keyword">TO</span> MASTER_HOST=<span class="string">'192.168.1.101'</span>, MASTER_USER=<span class="string">'slave'</span>, MASTER_PASSWORD=<span class="string">'password'</span>, MASTER_LOG_FILE=<span class="string">'mysql-bin.000001'</span>, MASTER_LOG_POS=<span class="number">5638</span> <span class="keyword">FOR</span> CHANNEL <span class="string">'Master_2'</span>;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>开启同步</strong><br>可以通过start slave 的方式启动所有复制，也可以单独指定启动某个数据源：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">start</span> <span class="keyword">slave</span> <span class="keyword">for</span> CHANNEL  <span class="string">'Master_1'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">start</span> <span class="keyword">slave</span> <span class="keyword">for</span> CHANNEL  <span class="string">'Master_2'</span>;</span></span><br></pre></td></tr></table></figure>
+<p>关闭同步也是如此。</p>
+<h3 id="验证-2"><a href="#验证-2" class="headerlink" title="验证"></a>验证</h3><p>参考主从复制流程，其中在从库进行状态验证时，结尾以FOR CHANNEL ‘CHANNEL_NAME’区分：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SHOW</span> <span class="keyword">SLAVE</span> <span class="keyword">STATUS</span> <span class="keyword">FOR</span> CHANNEL <span class="string">'Master_1'</span>\<span class="keyword">G</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">SLAVE</span> <span class="keyword">STATUS</span> <span class="keyword">FOR</span> CHANNEL <span class="string">'Master_2'</span>\<span class="keyword">G</span></span></span><br></pre></td></tr></table></figure></p>
+<p>也可以查看数据库<code>performance_schema</code>的相关表查看同步状态：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM performance_schema.replication_connection_status \G</span><br><span class="line">*************************** <span class="number">1.</span> row ***************************</span><br><span class="line">             CHANNEL_NAME:</span><br><span class="line">               GROUP_NAME:</span><br><span class="line">              SOURCE_UUID: e1767343-c887-<span class="number">11e7</span>-<span class="number">9562</span>-<span class="number">560001432728</span></span><br><span class="line">                THREAD_ID: <span class="number">26</span></span><br><span class="line">            SERVICE_STATE: ON</span><br><span class="line">COUNT_RECEIVED_HEARTBEATS: <span class="number">240</span></span><br><span class="line"> LAST_HEARTBEAT_TIMESTAMP: <span class="number">2018</span>-<span class="number">05</span>-<span class="number">29</span> <span class="number">18</span>:<span class="number">57</span>:<span class="number">16</span></span><br><span class="line"> RECEIVED_TRANSACTION_SET:</span><br><span class="line">        LAST_ERROR_NUMBER: <span class="number">0</span></span><br><span class="line">       LAST_ERROR_MESSAGE:</span><br><span class="line">     LAST_ERROR_TIMESTAMP: <span class="number">0000</span>-<span class="number">00</span>-<span class="number">00</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line"><span class="number">1</span> row in set (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>常用命令：</strong><br>启动从库复制线程：start slave;<br>停止从库复制线程：stop slave;<br>查看主库运行状态：show master status;<br>查看从库运行状态：show slave status \G<br>查看从库主机列表：show slave hosts;<br>查看binlog文件列表：show binary logs;<br>查看第一个binlog文件内容：show binlog events;<br>查看指定binlog文件的内容：show binlog events in ‘mysql-bin.000001’;<br>查看指定binlog文件指定位置的内容：show binlog events in ‘mysql-bin.000001’ from 1625222 limit 10 \G</p>
+<hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a href="http://dbaplus.cn/news-11-790-1.html" target="_blank" rel="external">性能提升利器：MySQL 5.7多源主从复制的独特性</a><br>[2] <a href="https://segmentfault.com/a/1190000010867488#articleHeader0" target="_blank" rel="external">搭建 MySQL 5.7.19 主从复制，以及复制实现细节分析</a><br>[3] <a href="http://www.cnblogs.com/kevingrace/p/6256603.html" target="_blank" rel="external">Mysql主从同步(1)-主从/主主环境部署梳理</a><br>[4] <a href="http://www.cnblogs.com/xuanzhi201111/p/5151666.html" target="_blank" rel="external">MySQL 5.7的多源复制</a><br>[5] <a href="https://blog.csdn.net/zyw_java/article/details/72984112" target="_blank" rel="external">MySql 5.7.18 数据库主从（Master/Slave）同步安装与配置详解</a></p>
+<p>转载请注明出处：<a href="http://yurixu.com/blog/2018/05/28/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%AE%80%E8%BF%B0">http://yurixu.com/blog/2018/05/28/MySQL主从复制简述</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!-- modify by yurixu 2016/1/1 replace Share -->
+      <a data-url="http://yurixu.com/blog/2018/05/28/MySql主从同步简述/" data-id="cjhrnj6sz0004n4rd0gstkbt6" class="article-share-link bdsharebuttonbox" data-cmd="more">分享</a>
+      <script>
+      window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+      </script>
+      <!-- add by yurixu 2016/1/6 修改评论定位 -->
+      <!-- add by yurixu 2018/5/29 关闭评论
+      
+        <a href="/blog/2018/05/28/MySql主从同步简述/#comments" class="article-comment-link">留言</a>
+      
+      -->
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+      <!--添加单篇文章阅读量统计-->
+      <span id="busuanzi_container_page_pv">
+        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+      </span>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2018/05/22/PHP APCU简述/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PHP APCu简述</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- add by yurixu 2018/5/29 关闭评论
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+      <div class="ds-thread" data-thread-key="post-MySql主从同步简述" data-title="MySQL主从复制简述" data-url="http://yurixu.com/blog/2018/05/28/MySql主从同步简述/"></div>
+      <!-- 多说评论框 end -->
+      <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:'yurixu'};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0] 
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      <!-- 多说公共JS代码 end -->
+  </section>
+  
+-->
+
+  <!-- 向百度自动推送-->
+  <script>
+  (function(){
+      var bp = document.createElement('script');
+      bp.src = '//push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script></section>
+        
+      </div>
+      <footer id="footer">
+  
+    <aside id="sidebar" class="outer">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Read/">Read</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/">Excel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/">FFmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/">Sublime</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/issue/">issue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储过程/">存储过程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/支付/">支付</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阅读/">阅读</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/MySQL/" style="font-size: 11.67px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Read/" style="font-size: 16.67px;">Read</a> <a href="/tags/Sublime/" style="font-size: 11.67px;">Sublime</a> <a href="/tags/issue/" style="font-size: 10px;">issue</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/存储过程/" style="font-size: 10px;">存储过程</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/支付/" style="font-size: 18.33px;">支付</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a> <a href="/tags/阅读/" style="font-size: 11.67px;">阅读</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2018/05/28/MySql主从同步简述/">MySQL主从复制简述</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/05/22/PHP APCU简述/">PHP APCu简述</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/11/10/统计数据表各列非空值的数量/">统计数据表各列非空值的数量</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/09/06/Postman-接口调试工具使用简介/">Postman接口调试工具使用简介</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/09/02/FFmpeg音视频转换/">FFmpeg音视频转换</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+    
+  <!-- add by yurixu 2016/1/3 add bottom -->
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+	  <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">          
+            Copyright &copy; 2018 Yurixu &nbsp; &nbsp;
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+	        <span id="busuanzi_container_site_uv">Total visit <span id="busuanzi_value_site_uv"></span> times</span> &nbsp; &nbsp; &nbsp; &nbsp;
+	        <span id="busuanzi_container_site_pv">Total views <span id="busuanzi_value_site_pv"></span> times</span> 
+		  </td>
+		  <td style="text-align:right">
+		    <div style="font-family: FontAwesome;font-size: 20px;">
+		    <a href="http://weibo.com/xywEliot" title="微博" target="_blank">&#61834;</a>&nbsp;		
+			<a href="http://user.qzone.qq.com/864909480" title="QQ空间" target="_blank">&#61910;</a>&nbsp;
+		    <a href="https://github.com/xuyuri" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+		    <a href="http://www.linkedin.com/in/yurixu" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;			    	
+			</div><br>
+		    <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;			
+			<a href="mailto:xywbupt@126.com" target="_blank">联系博主</a>&nbsp; &nbsp;	
+			<a href="http://tongji.baidu.com/web/18697832">站长统计</a>			
+		  </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+<!-- add by yurixu 2016/1/1 add website counter -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories/Read/" class="mobile-nav-link">Reading</a>
+  
+    <a href="https://github.com/xuyuri" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/atom.xml" class="mobile-nav-link">RSS</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+< !-- add by yurixu 替换Google的jquery并且添加判断逻辑 -->
+<script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+<!-- add by yurixu 2016/1/8 添加swiftype搜索代码 -->
+<!-- 
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','Fa9mKyRrtZcNX19oWoxv','2.0.0');
+</script>
+-->
+
+  </div>
+</body>
+</html>
